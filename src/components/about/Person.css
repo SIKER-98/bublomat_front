@@ -1,0 +1,23 @@
+.personCard {
+    box-sizing: border-box;
+    padding: 15px;
+    flex-basis: 40%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    box-shadow: 0 2px 20px rgba(1, 41, 112, 0.3);
+    margin: 10px;
+}
+
+.personCard img {
+    width: 30%;
+    margin-right: 10px;
+    border-radius: 50%;
+    box-shadow: 0 2px 20px rgba(1, 41, 112, 0.4);
+}
+
+.personCard p {
+    display: block;
+    width: 50%;
+    font-size: 20px;
+}

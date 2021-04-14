@@ -1,0 +1,26 @@
+.home {
+    width: 100%;
+    max-width: 800px;
+    margin: 30px auto;
+    display: flex;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    padding: 10px;
+    justify-content: space-around;
+    align-content: space-around;
+}
+
+.homeBox{
+    box-sizing: border-box;
+    font-size: 20px;
+    flex-basis: 40%;
+    margin: 20px 10px;
+    padding: 30px;
+    letter-spacing: 1px;
+    box-shadow: 0 2px 20px rgba(1, 41, 112, 0.3);
+}
+
+.homeBox span{
+    font-weight: bold;
+}
+
