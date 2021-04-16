@@ -11,7 +11,10 @@
 }
 
 header {
-    margin: 0 10px 20px 10px;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
     font-family: 'Nunito', sans-serif;
     display: flex;
     align-content: center;
