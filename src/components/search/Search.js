@@ -4,6 +4,50 @@ import './Search.css';
 import ProductCard from "../productCard/ProductCard";
 
 class Search extends React.Component {
+
+    state = {
+        products: [
+            {
+                id: 1,
+                name: "Agresywna wiśnia",
+                img: "img/wisnia.jpg",
+                description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc orci ante, congue id nisi id, faucibus placerat nulla. Morbi lobortis sapien nec porta finibus. Sed eu massa enim. Etiam ultricies pretium sodales. Curabitur ullamcorper dapibus gravida. Phasellus mollis dignissim gravida. Vivamus pellentesque ullamcorper malesuada. Donec quis volutpat mi.",
+                rating: 10,
+            },
+            {
+                id: 2,
+                name: "Bardzo agresywna wiśnia",
+                img: "img/wisnia.jpg",
+                description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc orci ante, congue id nisi id, faucibus placerat nulla. Morbi lobortis sapien nec porta finibus. Sed eu massa enim. Etiam ultricies pretium sodales. Curabitur ullamcorper dapibus gravida. Phasellus mollis dignissim gravida. Vivamus pellentesque ullamcorper malesuada. Donec quis volutpat mi.",
+                rating: 20,
+            },
+            {
+                id: 3,
+                name: "Najagresywniejsza wiśnia",
+                img: "img/wisnia.jpg",
+                description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc orci ante, congue id nisi id, faucibus placerat nulla. Morbi lobortis sapien nec porta finibus. Sed eu massa enim. Etiam ultricies pretium sodales. Curabitur ullamcorper dapibus gravida. Phasellus mollis dignissim gravida. Vivamus pellentesque ullamcorper malesuada. Donec quis volutpat mi.",
+                rating: 35,
+            },
+            {
+                id: 4,
+                name: "Po prostu Wasilij",
+                img: "img/wasiluk.jpg",
+                description: "Tego nazwiska nie trzeba chyba nikomu przedstawiać. Znany podróżnik, podchorąży i lider zespołu pracującego nad bublomatem.",
+                rating: 80,
+            },
+        ]
+    }
+
+    items = this.state.products.map(item => (
+        <ProductCard 
+        key={item.id}
+        name={item.name}
+        img={item.img}
+        description={item.description}
+        rating={item.rating}
+        />
+    ))
+
     render() {
         return (
             <div className={'searchWrapper'}>
@@ -19,9 +63,7 @@ class Search extends React.Component {
 
 
                 <div className={'productList'}>
-                    <ProductCard />
-                    <ProductCard />
-                    <ProductCard />
+                    {this.items}
                 </div>
             </div>
         )
