@@ -1,91 +1,122 @@
 import React, {useState, useEffect} from "react";
 import axios from "./axios";
 
+import Product from "../models/Product";
 
-// Pobranie wszystkich przedmiotów:
-//     https://bublomat.herokuapp.com/products/allproducts
-//         Stworzenie przedmiotu
-// https://bublomat.herokuapp.com/products/addproduct
+// koncowka do api
+const apiProduct = '/api/products';
 
-function createProduct(data) {
-    let product = new Produ
-}
-
+/// Pobranie wszystkich produktów
+/// return: tablica wszystkich produktów
 function fetchProduct() {
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
-        axios.get('/products/allproducts')
+        axios.get(apiProduct)
             .then(res => {
                 let array = [];
-                res.data.map(product => array.push(createProduct(product)));
+                res.data.map(product => array.push(JSON.parse(product)));
                 setProducts(array);
             });
     })
 
+    console.log(products)
     return products;
 }
 
 
-class ApiProduct extends React.Component {
-    constructor(props) {
-        super(props);
+// Pobranie produktu po nazwie
+// input: product name - wyszukiwana fraza
+// return: tablica obiektow typu Product
+function searchProduct(productName) {
+    const [products, setProducts] = useState([]);
 
-        this.state = {
-            products: []
-        };
-    }
+    let searched = new Product();
+    searched.productName = productName;
 
-    render() {
-        return (
-            <div>
-                test
-                {this.fetchProducts()}
-            </div>
-        );
-    }
+    useEffect(() => {
 
-    #apiProduct = '/products/allproducts';
+        axios.get(apiProduct, {params: {product: searched}})
+            .then(res => {
+                let array = [];
+                res.data.map(product => array.push(createProduct(JSON.parse(product))));
+                setProducts(array);
+            });
+    })
 
-    // pobranie listy wszystkich produktow
-    fetchProducts() {
-
-        // useEffect(()=>{
-        //     const res = axios.get(this.#apiProduct);
-        //     console.log(res.data);
-        // })
-
-        // const res = await axios.get(this.#apiProduct);
-        // console.log(res.data);
-        //
-        // this.setState({products: res.data})
-        return "test"
-    }
-
-    // // stworzenie produtku
-    // async createProduct(product) {
-    //     let receivedProduct;
-    //     const res = await axios.post(this.#apiProduct, product)
-    //         .then(function (response) {
-    //             console.log(response)
-    //             receivedProduct = response.data;
-    //         })
-    //         .catch(function (error) {
-    //             console.log(error)
-    //         })
-    //
-    //     // return receivedProduct;
-    // }
-    //
-    // // porabnie produktu
-    // async getProduct(id) {
-    //     let receivedProduct;
-    //     const res = await axios.get(this.apiProduct + "/" + id)
-    //     console.log(res.data);
-    //
-    //     // return res.data
-    // }
+    console.log(products)
+    return products;
 }
 
-export default ApiProduct;
+/// Dodawanie produktu
+/// input: produkt do dodania
+/// return: dodany produkt
+function addProduct(newProduct) {
+    const [product, setProduct] = useState(null);
 
+    useEffect(() => {
+        axios.post(apiProduct, {params: {product: newProduct}})
+            .then(res => {
+                let product = createProduct(JSON.parse(res));
+                setProduct(product);
+            })
+    })
+
+    console.log(product);
+    return product;
+}
+
+/// Wyszukiwanie produktu po jego id
+/// input: id produktu
+/// return: wyszukany produkt
+function getProductById(id) {
+    const [product, setProduct] = useState(null);
+
+    let searched = new Product();
+    searched.id = id;
+
+    useEffect(() => {
+        axios.get(apiProduct, {params: {product: searched}})
+            .then(res => {
+                let product = createProduct(JSON.parse(res));
+                setProduct(product);
+            })
+    })
+
+    console.log(product);
+    return product;
+}
+
+/// Dodanie oceny do produktu
+/// input produkt, uzytkownik
+/// return produkt po ocenie
+function rateProduct(product, user){
+    const [product, setProduct] = useState(null);
+
+    useEffect(()=>{
+        axios.pull(apiProduct, {params:{product:product, user:user}})
+            .then(res=>{
+                let product = createProduct(JSON.parse(res));
+                setProduct(product);
+            })
+    })
+
+    console.log(product);
+    return product
+}
+
+
+
+export {fetchProduct, searchProduct, addProduct, getProductById, rateProduct};
+
+/// stworzenie produktu z JSON-a
+function createProduct(obj) {
+    let product = new Product();
+    product.id = obj.id;
+    product.productName = obj.productName;
+    product.description = obj.description;
+    product.rating = obj.rating;
+    product.img = obj.img;
+
+    return product;
+}
