@@ -1,34 +1,82 @@
 import axios from './axios';
+import {useEffect, useState} from "react";
 
 
-class ApiComment {
-    #apiComment = '/Comments';
+const apiComment = '/api/Comments';
 
-    // pobranie komentarza do produktu
-    async fetchComments(postId) {
-        const res = await axios.get(this.#apiComment + `/${postId}`);
-        console.log(res.data);
+/// Pobranie wszystkich komentarzy dla produktu
+/// input: produkt
+/// return: tablica wszystkich komentarzy dla produktu
+function fetchComments(product) {
+    const [comments, setComments] = useState([]);
 
-        // return res.data;
-    }
+    useEffect(() => {
+        axios.get(apiComment, {params: {product: product}})
+            .then(res => {
+                let array = [];
+                res.data.map(comment => array.push(createComment(JSON.parse(comment))));
+                setComments(array);
+            });
+    })
 
-    //dodanie komentarza do produktu
-    async addComment(comment) {
-        let receivedComment;
-        const res = await axios.post(this.#apiComment, comment)
-            .then(function (response) {
-                console.log(response);
-                receivedComment = response.data;
+    console.log(comments)
+    return comments;
+}
+
+/// Dodanie komentarza
+/// input: produkt, user
+/// return: komentarz
+function addComment(newComment) {
+    const [comment, setComment] = useState(null);
+
+    useEffect(() => {
+        axios.post(apiComment, {params: {comment: newComment}})
+            .then(res => {
+                let comment = createComment(JSON.parse(res));
+                setComment(comment);
+            });
+    });
+
+    console.log(comments);
+    return comments;
+}
+
+/// Edycja komentarza
+/// input: komentarz
+/// return: zmieniony komentarz
+function editComment(editedComment) {
+    const [comment, setComment] = useState(null);
+
+    useEffect(() => {
+        axios.pull(apiComment, {params: {comment: editedComment}})
+            .then(res => {
+                let comment = createComment(JSON.parse(res));
+                setComment(comment);
             })
-            .catch(function (error) {
-                console.log(error)
-            })
+    })
 
-        // return receivedComment
-    }
+    console.log(comment);
+    return comment;
+}
 
-    async editComment(comment){
-        let receivedComment;
-        await axios.put()
-    }
+/// Usuwanie komentarza
+/// input: komentarz
+
+function deleteComment(deletedComment) {
+    useEffect(() => {
+        axios.delete(apiComment, {params: {comment: deletedComment}})
+    })
+}
+
+
+export {fetchComments, addComment, editComment, deleteComment};
+
+/// stworzenie komentarza z JSON-a
+function createComment(obj) {
+    let product = new Comment(obj.userId, obj.productId);
+    product.id = obj.id;
+    product.date = obj.date;
+    product.text = obj.text;
+
+    return product;
 }

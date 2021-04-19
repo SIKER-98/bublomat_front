@@ -88,13 +88,13 @@ function getProductById(id) {
 }
 
 /// Dodanie oceny do produktu
-/// input produkt, uzytkownik
+/// input produkt, id uzytkownik
 /// return produkt po ocenie
-function rateProduct(product, user){
+function rateProduct(product, userId){
     const [product, setProduct] = useState(null);
 
     useEffect(()=>{
-        axios.pull(apiProduct, {params:{product:product, user:user}})
+        axios.pull(apiProduct, {params:{product:product, userId:userId}})
             .then(res=>{
                 let product = createProduct(JSON.parse(res));
                 setProduct(product);
