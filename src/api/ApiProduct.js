@@ -8,7 +8,7 @@ const apiProduct = '/api/products';
 
 /// Pobranie wszystkich produktów
 /// return: tablica wszystkich produktów
-function fetchProduct() {
+function FetchProduct() {
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
@@ -28,7 +28,7 @@ function fetchProduct() {
 // Pobranie produktu po nazwie
 // input: product name - wyszukiwana fraza
 // return: tablica obiektow typu Product
-function searchProduct(productName) {
+function SearchProduct(productName) {
     const [products, setProducts] = useState([]);
 
     let searched = new Product();
@@ -51,7 +51,7 @@ function searchProduct(productName) {
 /// Dodawanie produktu
 /// input: produkt do dodania
 /// return: dodany produkt
-function addProduct(newProduct) {
+function AddProduct(newProduct) {
     const [product, setProduct] = useState(null);
 
     useEffect(() => {
@@ -69,7 +69,7 @@ function addProduct(newProduct) {
 /// Wyszukiwanie produktu po jego id
 /// input: id produktu
 /// return: wyszukany produkt
-function getProductById(id) {
+function GetProductById(id) {
     const [product, setProduct] = useState(null);
 
     let searched = new Product();
@@ -90,11 +90,11 @@ function getProductById(id) {
 /// Dodanie oceny do produktu
 /// input produkt, id uzytkownik
 /// return produkt po ocenie
-function rateProduct(product, userId){
+function RateProduct(productName, userId){
     const [product, setProduct] = useState(null);
 
     useEffect(()=>{
-        axios.pull(apiProduct, {params:{product:product, userId:userId}})
+        axios.pull(apiProduct, {params:{product:productName, userId:userId}})
             .then(res=>{
                 let product = createProduct(JSON.parse(res));
                 setProduct(product);
@@ -107,7 +107,7 @@ function rateProduct(product, userId){
 
 
 
-export {fetchProduct, searchProduct, addProduct, getProductById, rateProduct};
+export {FetchProduct, SearchProduct, AddProduct, GetProductById, RateProduct};
 
 /// stworzenie produktu z JSON-a
 function createProduct(obj) {

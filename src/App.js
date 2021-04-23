@@ -12,10 +12,13 @@ import Contact from "./components/contact/Contact";
 import Home from "./components/home/Home";
 import Search from "./components/search/Search";
 
+import {FetchProduct} from './api/ApiProduct'
+
 export default function App() {
   return (
       <HashRouter>
         <Navigation/>
+          {/*{FetchProduct()}*/}
 
         <div className={'content'}>
           <Route path={'/home'} component={Home}/>
