@@ -13,6 +13,20 @@ class Search extends React.Component {
                 img: "img/wisnia.jpg",
                 description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc orci ante, congue id nisi id, faucibus placerat nulla. Morbi lobortis sapien nec porta finibus. Sed eu massa enim. Etiam ultricies pretium sodales. Curabitur ullamcorper dapibus gravida. Phasellus mollis dignissim gravida. Vivamus pellentesque ullamcorper malesuada. Donec quis volutpat mi.",
                 rating: 10,
+                comments: [
+                    {
+                        result: 8,
+                        comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc orci ante, congue id nisi id."
+                    },
+                    {
+                        result: 5,
+                        comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc orci ante, congue id nisi id."
+                    },
+                    {
+                        result: 3,
+                        comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc orci ante, congue id nisi id."
+                    },
+                ]
             },
             {
                 id: 2,
@@ -20,6 +34,20 @@ class Search extends React.Component {
                 img: "img/wisnia.jpg",
                 description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc orci ante, congue id nisi id, faucibus placerat nulla. Morbi lobortis sapien nec porta finibus. Sed eu massa enim. Etiam ultricies pretium sodales. Curabitur ullamcorper dapibus gravida. Phasellus mollis dignissim gravida. Vivamus pellentesque ullamcorper malesuada. Donec quis volutpat mi.",
                 rating: 20,
+                comments: [
+                    {
+                        result: 8,
+                        comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc orci ante, congue id nisi id."
+                    },
+                    {
+                        result: 5,
+                        comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc orci ante, congue id nisi id."
+                    },
+                    {
+                        result: 3,
+                        comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc orci ante, congue id nisi id."
+                    },
+                ]
             },
             {
                 id: 3,
@@ -27,6 +55,20 @@ class Search extends React.Component {
                 img: "img/wisnia.jpg",
                 description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc orci ante, congue id nisi id, faucibus placerat nulla. Morbi lobortis sapien nec porta finibus. Sed eu massa enim. Etiam ultricies pretium sodales. Curabitur ullamcorper dapibus gravida. Phasellus mollis dignissim gravida. Vivamus pellentesque ullamcorper malesuada. Donec quis volutpat mi.",
                 rating: 35,
+                comments: [
+                    {
+                        result: 8,
+                        comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc orci ante, congue id nisi id."
+                    },
+                    {
+                        result: 5,
+                        comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc orci ante, congue id nisi id."
+                    },
+                    {
+                        result: 3,
+                        comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc orci ante, congue id nisi id."
+                    },
+                ]
             },
             {
                 id: 4,
@@ -34,6 +76,20 @@ class Search extends React.Component {
                 img: "img/wasiluk.jpg",
                 description: "Tego nazwiska nie trzeba chyba nikomu przedstawiać. Znany podróżnik, podchorąży i lider zespołu pracującego nad bublomatem.",
                 rating: 80,
+                comments: [
+                    {
+                        result: 8,
+                        comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc orci ante, congue id nisi id."
+                    },
+                    {
+                        result: 5,
+                        comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc orci ante, congue id nisi id."
+                    },
+                    {
+                        result: 3,
+                        comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc orci ante, congue id nisi id."
+                    },
+                ]
             },
         ]
     }
@@ -45,6 +101,7 @@ class Search extends React.Component {
         img={item.img}
         description={item.description}
         rating={item.rating}
+        comments={item.comments}
         />
     ))
 
