@@ -29,6 +29,7 @@ class Login extends React.Component {
             this.props.history.push('/home');
         } else {
             this.setState({hasLoginFailed: true});
+            alert('Invalid login or password')
         }
     }
 
