@@ -46,3 +46,24 @@ nav ul {
     flex-grow: 1;
     justify-content: flex-end;
 }
+
+nav li {
+    line-height: 1;
+    list-style: none;
+    font-weight: bold;
+    font-size: 20px;
+    padding: 0 10px;
+    margin: 0 10px;
+
+    transition: color 0.3s;
+    cursor: pointer;
+}
+
+nav li > a {
+    text-decoration: none;
+    color: var(--darkBlue);;
+}
+
+nav li >a:hover {
+    color: var(--blue);
+}

@@ -1,5 +1,5 @@
 import React from 'react';
-import {HashRouter, Switch, Route, Link} from "react-router-dom";
+import {BrowserRouter, Route, Switch} from "react-router-dom";
 
 import './index.css'
 
@@ -11,26 +11,29 @@ import About from "./components/about/About";
 import Contact from "./components/contact/Contact";
 import Home from "./components/home/Home";
 import Search from "./components/search/Search";
-
-import {FetchProduct} from './api/ApiProduct'
+import AuthenticatedRoute from "./components/authentication/AuthenticatedRoute";
+import ErrorComponent from "./components/error/ErrorComponent";
 
 export default function App() {
-  return (
-      <HashRouter>
-        <Navigation/>
-          {/*{FetchProduct()}*/}
+    return (
+        <BrowserRouter>
+            <>
+                <Navigation/>
+                <div className={'content'}>
+                    <Switch>
+                        <Route path={'/'} exact component={Login}/>
+                        <Route path={'/home'} component={Home}/>
+                        <AuthenticatedRoute path={'/search'} component={Search}/>
+                        <Route path={'/about'} component={About}/>
+                        <Route path={'/contact'} component={Contact}/>
+                        <Route path={'/login'} component={Login}/>
+                        <Route path={'/register'} component={Register}/>
+                        <Route component={ErrorComponent}/>
+                    </Switch>
+                </div>
 
-        <div className={'content'}>
-          <Route path={'/home'} component={Home}/>
-          <Route path={'/search'} component={Search}/>
-          <Route path={'/about'} component={About}/>
-          <Route path={'/contact'} component={Contact}/>
-          <Route path={'/login'} component={Login}/>
-          <Route path={'/register'} component={Register}/>
-        </div>
-
-        <Footer/>
-      </HashRouter>
-  )
+                <Footer/>
+            </>
+        </BrowserRouter>
+    )
 }
-

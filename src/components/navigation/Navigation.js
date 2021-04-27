@@ -1,11 +1,13 @@
 import React from 'react';
 import './Navigation.css';
-import NavigationItem from '../navigationItem/NavigationItem';
+import AuthenticationService from "../authentication/AuthenticationService";
+import {Link} from "react-router-dom";
+import {withRouter} from 'react-router'
 
 class Navigation extends React.Component {
-
-
     render() {
+        const isUserLoggedIn = AuthenticationService.isUserLoggedIn();
+
         return (
             <header>
                 <div className={"logo"}>
@@ -14,21 +16,19 @@ class Navigation extends React.Component {
 
                 <nav>
                     <ul className={'navigationPage'}>
-                        <NavigationItem text={'Home'}
-                                        href={'/home'}/>
-                        <NavigationItem text={'Search'}
-                                        href={'/search'}/>
-                        <NavigationItem text={'About us'}
-                                        href={'/about'}/>
-                        <NavigationItem text={'Contact'}
-                                        href={'/contact'}/>
+                        <li><Link to={'/home'}>Home</Link></li>
+                        {isUserLoggedIn && <li><Link to={'/search'}>Search</Link></li>}
+                        <li><Link to={'/about'}>About us</Link></li>
+                        <li><Link to={'/contact'}>Contact</Link></li>
                     </ul>
                     <ul className={'navigationLogin'}>
-                        <NavigationItem text={'Login'}
-                                        href={'/login'}/>
-                        <NavigationItem text={'Register'}
-                                        href={'/register'}/>
-
+                        {!isUserLoggedIn && <li><Link to={'/login'}>Login</Link></li>}
+                        {!isUserLoggedIn && <li><Link to={'/register'}>Register</Link></li>}
+                        {isUserLoggedIn &&
+                        <li>
+                            <Link to={'/home'}
+                                  onClick={AuthenticationService.logout}>Logout</Link>
+                        </li>}
                     </ul>
                 </nav>
             </header>
@@ -36,4 +36,4 @@ class Navigation extends React.Component {
     }
 }
 
-export default Navigation;
+export default withRouter(Navigation);
