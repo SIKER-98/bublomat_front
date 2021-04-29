@@ -4,7 +4,11 @@
 #root {
     font-family: 'Nunito', sans-serif;
     position: relative;
-    min-height: 100vh;
+    min-height: 98vh;
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: row;
 }
 
 :root {
@@ -21,4 +25,7 @@
 .content {
     margin-top: 80px;
     padding-bottom: 2.5rem;
+    flex-grow: 1;
+    align-self: center;
+    justify-self: center;
 }

@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700&display=swap');
+
+
+/*pasek nawigacyjny*/
+.navbar {
+    position: fixed;
+    left: 1vw;
+    right: 1vw;
+    top: 0;
+
+    display: flex;
+    align-content: center;
+
+    font-family: 'Nunito', sans-serif;
+    background: var(--white);
+    padding: 5px 0;
+    box-shadow: 0 2px 20px rgba(1, 41, 112, 0.1);
+}
+
+.navbar-logo {
+    margin-right: 20px;
+    margin-left: 20px;
+    align-self: center;
+    padding: 0 10px;
+
+    text-decoration: none;
+    font-size: 30px;
+    font-weight: bold;
+    color: var(--darkBlue);
+}
+
+.navbar-nav {
+    display: flex;
+    flex-grow: 1;
+
+    margin-left: 30px;
+}
+
+
+.navbar-nav-page {
+    display: flex;
+    justify-content: space-around;
+}
+
+.navbar-nav-login {
+    display: flex;
+    justify-content: space-around;
+}
+
+.navbar-nav-page {
+    display: flex;
+    justify-content: space-around;
+    flex-grow: 1;
+    flex-wrap: wrap;
+}
+
+.navbar-nav-login {
+    display: flex;
+    margin-right: 20px;
+    flex-grow: 1;
+    justify-content: flex-end;
+}
+
+.navbar-nav-login li, .navbar-nav-page li {
+    list-style: none;
+}
+
+.navbar-nav-item {
+    line-height: 1;
+    font-weight: bold;
+    font-size: 20px;
+    padding: 0 10px;
+    margin: 0 10px;
+    text-decoration: none;
+    color: var(--darkBlue);
+
+    transition: color 0.3s;
+    cursor: pointer;
+}
+
+.navbar-nav-item:hover {
+    color: var(--blue);
+}

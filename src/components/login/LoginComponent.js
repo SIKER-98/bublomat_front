@@ -1,9 +1,9 @@
 import React from 'react';
 
-import './Login.css';
+import '../../style/Form.css'
 import AuthenticationService from "../authentication/AuthenticationService";
 
-class Login extends React.Component {
+class LoginComponent extends React.Component {
     constructor(props) {
         super(props);
 
@@ -15,13 +15,14 @@ class Login extends React.Component {
 
         this.handleChange = this.handleChange.bind(this);
         this.loginClicked = this.loginClicked.bind(this);
-
     }
 
+    // obsluga wprowadzania w inputy
     handleChange(event) {
         this.setState({[event.target.name]: event.target.value});
     }
 
+    // przycisk logowania
     loginClicked(event) {
         event.preventDefault();
         if (this.state.username === 'user' && this.state.password === 'user') {
@@ -35,19 +36,25 @@ class Login extends React.Component {
 
     render() {
         return (
-            <form className={'login'}>
-                <label className={'loginLabel'}>Nickname:</label>
-                <input name={'username'} onChange={this.handleChange}
-                       className={`loginInput ${this.state.hasLoginFailed ? 'loginInputWrong' : ''}`}
+            <form className={'form'}>
+                <label className={'form-label'}>Nickname:</label>
+                <input name={'username'}
+                       autoComplete={'off'}
+                       onChange={this.handleChange}
+                       className={`form-input ${this.state.hasLoginFailed ? 'form-input-wrong' : ''}`}
                        type={'text'}/>
-                <label className={'loginLabel'}>Password:</label>
-                <input name={'password'} onChange={this.handleChange}
-                       className={`loginInput ${this.state.hasLoginFailed ? 'loginInputWrong' : ''}`}
+
+                <label className={'form-label'}>Password:</label>
+                <input name={'password'}
+                       onChange={this.handleChange}
+                       className={`form-input ${this.state.hasLoginFailed ? 'form-input-wrong' : ''}`}
                        type={'password'}/>
-                <button className={'loginButton'} onClick={this.loginClicked}>Login</button>
+
+                <button className={'btn-blue'}
+                        onClick={this.loginClicked}>Login</button>
             </form>
         )
     }
 }
 
-export default Login;
+export default LoginComponent;

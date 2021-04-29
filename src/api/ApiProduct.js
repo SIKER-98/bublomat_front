@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
-import axios from "./axios";
+import axios from './axiosHelper'
 
-import Product from "../models/Product";
+import ProductModel from "../models/ProductModel.js";
 
 // koncowka do api
 const apiProduct = '/api/products';
@@ -27,15 +27,14 @@ function FetchProduct() {
 
 // Pobranie produktu po nazwie
 // input: product name - wyszukiwana fraza
-// return: tablica obiektow typu Product
+// return: tablica obiektow typu ProductModel
 function SearchProduct(productName) {
     const [products, setProducts] = useState([]);
 
-    let searched = new Product();
+    let searched = new ProductModel();
     searched.productName = productName;
 
     useEffect(() => {
-
         axios.get(apiProduct, {params: {product: searched}})
             .then(res => {
                 let array = [];
@@ -72,7 +71,7 @@ function AddProduct(newProduct) {
 function GetProductById(id) {
     const [product, setProduct] = useState(null);
 
-    let searched = new Product();
+    let searched = new ProductModel();
     searched.id = id;
 
     useEffect(() => {
@@ -111,7 +110,7 @@ export {FetchProduct, SearchProduct, AddProduct, GetProductById, RateProduct};
 
 /// stworzenie produktu z JSON-a
 function createProduct(obj) {
-    let product = new Product();
+    let product = new ProductModel();
     product.id = obj.id;
     product.productName = obj.productName;
     product.description = obj.description;

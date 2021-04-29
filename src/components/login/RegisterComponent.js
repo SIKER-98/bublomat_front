@@ -1,7 +1,7 @@
 import React from 'react';
-import './Register.css';
+import '../../style/Form.css'
 
-class Register extends React.Component {
+class RegisterComponent extends React.Component {
 
     constructor(props) {
         super(props);
@@ -27,27 +27,30 @@ class Register extends React.Component {
         this.errorMessage = '';
     }
 
-
+    // obsluga wprowadzania w pola
     handleChange(event) {
         this.setState({[event.target.name]: event.target.value});
-        event.target.classList.remove('registerInputWrong')
+        event.target.classList.remove('form-input-wrong')
     }
 
+    // sprawdzenie czy wszystkie pola zostaly podane
     validateInputRequired(input, state) {
         if (!state) {
-            input[0].classList.add('registerInputWrong')
+            input[0].classList.add('form-input-wrong')
             this.errorMessage += 'Missing input: ' + input[0].name + '\n';
         }
     }
 
+    // sprawdzenie czy hasla sa takie same
     validatePassword(password, confirmedPassword) {
         if (password[0].value !== confirmedPassword[0].value) {
-            password[0].classList.add('registerInputWrong')
-            confirmedPassword[0].classList.add('registerInputWrong');
+            password[0].classList.add('form-input-wrong')
+            confirmedPassword[0].classList.add('form-input-wrong');
             this.errorMessage += 'Different passwords\n';
         }
     }
 
+    // obsluga przycisku rejestracji
     registerClicked(event) {
         event.preventDefault();
         const state = this.state;
@@ -72,36 +75,38 @@ class Register extends React.Component {
         }
     }
 
-    //this.props.history.push('/login');
-
     render() {
         return (
-            <form className={'register'}>
-                <label className={'registerLabel'}>Nickname:</label>
-                <input type={'text'} name={'username'}
+            <form className={'form'}>
+                <label className={'form-label'}>Nickname:</label>
+                <input name={'username'}
+                       type={'text'}
                        autoComplete={'off'}
                        onChange={this.handleChange}
-                       className={'registerInput'}/>
+                       className={'form-input'}/>
 
-                <label className={'registerLabel'}>Password:</label>
-                <input type={'password'} name={'password'}
+                <label className={'form-label'}>Password:</label>
+                <input name={'password'}
+                       type={'password'}
                        onChange={this.handleChange}
                        autoComplete={'off'}
-                       className={'registerInput'}/>
+                       className={'form-input'}/>
 
-                <label className={'registerLabel'}>Confirm Password:</label>
-                <input type={'password'} name={'confirmedPassword'}
+                <label className={'form-label'}>Confirm Password:</label>
+                <input name={'confirmedPassword'}
+                       type={'password'}
                        onChange={this.handleChange}
                        autoComplete={'off'}
-                       className={'registerInput'}/>
+                       className={'form-input'}/>
 
-                <label className={'registerLabel'}>Email:</label>
-                <input type={'email'} name={'email'}
+                <label className={'form-label'}>Email:</label>
+                <input name={'email'}
+                       type={'email'}
                        autoComplete={'off'}
                        onChange={this.handleChange}
-                       className={'registerInput'}/>
+                       className={'form-input'}/>
 
-                <button className={'registerButton'} onClick={this.registerClicked}>
+                <button className={'btn-blue'} onClick={this.registerClicked}>
                     Register
                 </button>
             </form>
@@ -109,4 +114,4 @@ class Register extends React.Component {
     }
 }
 
-export default Register
+export default RegisterComponent
