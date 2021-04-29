@@ -3,65 +3,69 @@ import axios from './axiosHelper'
 
 import ProductModel from "../models/ProductModel.js";
 
-// koncowka do api
 const apiProduct = '/api/products';
 
 /// Pobranie wszystkich produktów
 /// return: tablica wszystkich produktów
-function FetchProduct() {
-    const [products, setProducts] = useState([]);
+async function FetchProduct() {
+    const api = '/api/products';
+    let products = [];
 
-    useEffect(() => {
-        axios.get(apiProduct)
-            .then(res => {
-                let array = [];
-                res.data.map(product => array.push(JSON.parse(product)));
-                setProducts(array);
-            });
-    })
+    await axios.get(api)
+        .then(res => {
+            console.log(JSON.parse(res.request.response))
+            products = JSON.parse(res.request.response)
+        })
 
-    console.log(products)
+
     return products;
 }
 
-
-// Pobranie produktu po nazwie
-// input: product name - wyszukiwana fraza
-// return: tablica obiektow typu ProductModel
-function SearchProduct(productName) {
-    const [products, setProducts] = useState([]);
+/// Pobranie produktów po nazwie
+/// input: nazwa produktu
+/// return: tablica wszystkich produktów
+async function SearchProduct(productName) {
+    const api = '/api/search';
+    let products = [];
 
     let searched = new ProductModel();
     searched.productName = productName;
 
-    useEffect(() => {
-        axios.get(apiProduct, {params: {product: searched}})
-            .then(res => {
-                let array = [];
-                res.data.map(product => array.push(createProduct(JSON.parse(product))));
-                setProducts(array);
-            });
-    })
+    await axios.get(api, {params: {productName: productName}})
+        .then(res => products = JSON.parse(res.request.response))
 
-    console.log(products)
     return products;
 }
+
 
 /// Dodawanie produktu
 /// input: produkt do dodania
 /// return: dodany produkt
-function AddProduct(newProduct) {
-    const [product, setProduct] = useState(null);
+async function AddProduct(newProduct) {
+    const api = '/api/products'
+    let product;
 
-    useEffect(() => {
-        axios.post(apiProduct, {params: {product: newProduct}})
-            .then(res => {
-                let product = createProduct(JSON.parse(res));
-                setProduct(product);
-            })
+    await axios.post(api, JSON.stringify(newProduct))
+        .then(res => {
+            console.log('res')
+            console.log(res.request.response)
+            product = JSON.parse(res.request.response)
+        })
+
+    await axios.post(api, {
+        "id": newProduct.id,
+        "productName": newProduct.productName,
+        "description": newProduct.desc,
+        "img": newProduct.img,
+        "rating": newProduct.rating,
     })
+        .then(res => {
+            console.log('res')
+            console.log(res.request.response)
+            product = JSON.parse(res.request.response)
+        })
 
-    console.log(product);
+    // console.log(product);
     return product;
 }
 
@@ -89,12 +93,12 @@ function GetProductById(id) {
 /// Dodanie oceny do produktu
 /// input produkt, id uzytkownik
 /// return produkt po ocenie
-function RateProduct(productName, userId){
+function RateProduct(productName, userId) {
     const [product, setProduct] = useState(null);
 
-    useEffect(()=>{
-        axios.pull(apiProduct, {params:{product:productName, userId:userId}})
-            .then(res=>{
+    useEffect(() => {
+        axios.pull(apiProduct, {params: {product: productName, userId: userId}})
+            .then(res => {
                 let product = createProduct(JSON.parse(res));
                 setProduct(product);
             })
@@ -105,17 +109,20 @@ function RateProduct(productName, userId){
 }
 
 
-
 export {FetchProduct, SearchProduct, AddProduct, GetProductById, RateProduct};
 
 /// stworzenie produktu z JSON-a
 function createProduct(obj) {
+    console.log(obj)
+
     let product = new ProductModel();
     product.id = obj.id;
     product.productName = obj.productName;
     product.description = obj.description;
     product.rating = obj.rating;
     product.img = obj.img;
+
+    console.log("product " + product)
 
     return product;
 }

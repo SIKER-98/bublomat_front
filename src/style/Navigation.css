@@ -7,6 +7,7 @@
     left: 1vw;
     right: 1vw;
     top: 0;
+    z-index: 1;
 
     display: flex;
     align-content: center;

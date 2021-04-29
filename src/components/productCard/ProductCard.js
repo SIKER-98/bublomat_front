@@ -45,7 +45,7 @@ class ProductCard extends React.Component {
                         {this.props.comments.map((comment, i) => (
                             <li key={i}>
                                 <h2 className={this.setRatingColour(comment.rate)}>Rate: {comment.rate}</h2>
-                                <p>{comment.content}</p>
+                                <p>{comment.comment}</p>
                             </li>
                         ))}
                     </ul>

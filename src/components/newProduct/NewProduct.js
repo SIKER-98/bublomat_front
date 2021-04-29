@@ -1,6 +1,5 @@
 import React from 'react';
 
-import './FileButton.css';
 import ProductModel from "../../models/ProductModel";
 import {AddProduct} from "../../api/ApiProduct";
 
@@ -28,7 +27,7 @@ class NewProduct extends React.Component {
         if (event.target.files.length !== 0) {
             this.setState({imageSource: event.target.files[0]})
             this.setState({image: URL.createObjectURL(event.target.files[0])})
-        }else{
+        } else {
             this.setState({imageSource: '/logo192.png'})
             this.setState({image: '/logo192.png'})
         }
@@ -56,11 +55,19 @@ class NewProduct extends React.Component {
         return product;
     }
 
-    addProduct() {
-        let product = this.makeProduct();
-        // AddProduct(product);
+    addProduct(e) {
+        e.preventDefault()
 
-        this.props.history.push(`/search/${this.state.name}`);
+        let product = this.makeProduct();
+
+        console.log('product')
+        console.log(product)
+
+        let response = AddProduct(product);
+
+        console.log('response')
+        console.log(response)
+        // this.props.history.push(`/search/${this.state.name}`);
     }
 
     render() {
@@ -70,15 +77,20 @@ class NewProduct extends React.Component {
                     <div>
                         <img src={this.state.image}
                              alt={'test'}
-                             className={'testImage'}/>
-                        <input type={'file'} name={'imageSource'}
-                               className={'custom-file-input'}
-                               onChange={this.handleChangeImage}/>
+                             className={'form-image'}/>
                         <div>
                             <p>Filename: {this.state.imageSource.name}</p>
                             <p>Filetype: {this.state.imageSource.type}</p>
                             <p>Size in bytes: {this.state.imageSource.size}</p>
                         </div>
+
+                        <input type={'file'}
+                               name={'imageSource'}
+                               id={'file'}
+                               className={'form-input-file'}
+                               onChange={this.handleChangeImage}/>
+                        <label htmlFor={'file'}
+                               className={'btn-blue'}>Select file</label>
                     </div>
 
                     <div className={''}>

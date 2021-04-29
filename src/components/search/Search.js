@@ -4,6 +4,7 @@ import {Link} from "react-router-dom";
 import './Search.css';
 // import {SearchProduct} from "../../api/ApiProduct";
 import ProductCard from "../productCard/ProductCard";
+import {FetchProduct, SearchProduct} from "../../api/ApiProduct";
 
 
 class Search extends React.Component {
@@ -22,149 +23,33 @@ class Search extends React.Component {
         this.handleChange = this.handleChange.bind(this);
     }
 
-
-    // items = this.state.products.map(item => (
-    //     <ProductCard
-    //         key={item.id}
-    //         name={item.name}
-    //         img={item.img}
-    //         description={item.description}
-    //         rating={item.rating}
-    //         comments={item.comments}
-    //     />
-    // ))
+    comments = [
+        {
+            result: 8,
+            comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc orci ante, congue id nisi id."
+        },
+        {
+            result: 5,
+            comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc orci ante, congue id nisi id."
+        },
+        {
+            result: 3,
+            comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc orci ante, congue id nisi id."
+        },
+    ]
 
     //klikniecie przycisku wyszukiwania
-    searchClick() {
+    async searchClick() {
         const productName = this.state.searchedProduct;
-        // const products = SearchProduct(productName);
-        // this.setState({products: products})
 
-        let state1 = {
-            products: [
-                {
-                    id: 1,
-                    name: "Agresywna wiśnia",
-                    img: "/img/wisnia.jpg",
-                    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc orci ante, congue id nisi id, faucibus placerat nulla. Morbi lobortis sapien nec porta finibus. Sed eu massa enim. Etiam ultricies pretium sodales. Curabitur ullamcorper dapibus gravida. Phasellus mollis dignissim gravida. Vivamus pellentesque ullamcorper malesuada. Donec quis volutpat mi.",
-                    rating: 10,
-                    comments: [
-                        {
-                            id: 1,
-                            productUd: 4,
-                            userId: 1,
-                            rate: 8,
-                            content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc orci ante, congue id nisi id."
-                        },
-                        {
-                            id: 2,
-                            productUd: 4,
-                            userId: 2,
-                            rate: 7,
-                            content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc orci ante, congue id nisi id."
-                        },
-                        {
-                            id: 3,
-                            productUd: 4,
-                            userId: 1,
-                            rate: 6,
-                            content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc orci ante, congue id nisi id."
-                        },
-                    ]
-                },
-                {
-                    id: 2,
-                    name: "Bardzo agresywna wiśnia",
-                    img: "/img/wisnia.jpg",
-                    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc orci ante, congue id nisi id, faucibus placerat nulla. Morbi lobortis sapien nec porta finibus. Sed eu massa enim. Etiam ultricies pretium sodales. Curabitur ullamcorper dapibus gravida. Phasellus mollis dignissim gravida. Vivamus pellentesque ullamcorper malesuada. Donec quis volutpat mi.",
-                    rating: 5,
-                    comments: [
-                        {
-                            id: 1,
-                            productUd: 4,
-                            userId: 1,
-                            rate: 8,
-                            content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc orci ante, congue id nisi id."
-                        },
-                        {
-                            id: 2,
-                            productUd: 4,
-                            userId: 2,
-                            rate: 7,
-                            content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc orci ante, congue id nisi id."
-                        },
-                        {
-                            id: 3,
-                            productUd: 4,
-                            userId: 1,
-                            rate: 6,
-                            content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc orci ante, congue id nisi id."
-                        },
-                    ]
-                },
-                {
-                    id: 3,
-                    name: "Najagresywniejsza wiśnia",
-                    img: "/img/wisnia.jpg",
-                    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc orci ante, congue id nisi id, faucibus placerat nulla. Morbi lobortis sapien nec porta finibus. Sed eu massa enim. Etiam ultricies pretium sodales. Curabitur ullamcorper dapibus gravida. Phasellus mollis dignissim gravida. Vivamus pellentesque ullamcorper malesuada. Donec quis volutpat mi.",
-                    rating: 2,
-                    comments: [
-                        {
-                            id: 1,
-                            productUd: 4,
-                            userId: 1,
-                            rate: 8,
-                            content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc orci ante, congue id nisi id."
-                        },
-                        {
-                            id: 2,
-                            productUd: 4,
-                            userId: 2,
-                            rate: 7,
-                            content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc orci ante, congue id nisi id."
-                        },
-                        {
-                            id: 3,
-                            productUd: 4,
-                            userId: 1,
-                            rate: 6,
-                            content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc orci ante, congue id nisi id."
-                        },
-                    ]
-                },
-                {
-                    id: 4,
-                    name: "Po prostu Wasilij",
-                    img: "/img/wasiluk.jpg",
-                    description: "Tego nazwiska nie trzeba chyba nikomu przedstawiać. Znany podróżnik, podchorąży i lider zespołu pracującego nad bublomatem.",
-                    rating: 1,
-                    comments: [
-                        {
-                            id: 1,
-                            productUd: 4,
-                            userId: 1,
-                            rate: 8,
-                            content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc orci ante, congue id nisi id."
-                        },
-                        {
-                            id: 2,
-                            productUd: 4,
-                            userId: 2,
-                            rate: 7,
-                            content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc orci ante, congue id nisi id."
-                        },
-                        {
-                            id: 3,
-                            productUd: 4,
-                            userId: 1,
-                            rate: 6,
-                            content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc orci ante, congue id nisi id."
-                        },
-                    ]
-                },
-            ]
+        let products = []
+        if (productName) {
+            products = await SearchProduct(productName);
+        } else {
+            products = await FetchProduct();
         }
-        this.setState({products: state1.products})
+
+        this.setState({products: products})
     }
 
     // obsluga wprowadzania w pola
@@ -200,8 +85,9 @@ class Search extends React.Component {
                                              name={product.name}
                                              description={product.description}
                                              rating={product.rating}
-                                             img={product.img}
-                                             comments={product.comments}
+                                    // img={product.img}
+                                             img={"/img/wisnia.jpg"}
+                                             comments={this.comments}
                                 />
                             </li>
                         )

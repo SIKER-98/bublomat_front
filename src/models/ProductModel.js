@@ -5,7 +5,6 @@ class ProductModel {
         this.description = '';
         this.rating = '';
         this.img = '';
-        this.comments = [];
     }
 }
 
