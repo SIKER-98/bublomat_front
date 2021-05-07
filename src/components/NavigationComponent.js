@@ -1,9 +1,11 @@
 import React from 'react';
-import '../../style/Navigation.css';
+import '../style/Navigation.css';
 import AuthenticationService from "../authentication/AuthenticationService";
 import {Link} from "react-router-dom";
 import {withRouter} from 'react-router'
 
+
+/// Komponent z paskiem nawigacyjnym
 class NavigationComponent extends React.Component {
     render() {
         const isUserLoggedIn = AuthenticationService.isUserLoggedIn();

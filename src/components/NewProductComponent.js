@@ -1,9 +1,9 @@
 import React from 'react';
 
-import ProductModel from "../../models/ProductModel";
-import {AddProduct} from "../../api/ApiProduct";
+import ProductModel from "../models/ProductModel";
+import {AddProduct} from "../api/ApiProduct";
 
-class NewProduct extends React.Component {
+class NewProductComponent extends React.Component {
     constructor(props) {
         super(props);
 
@@ -58,16 +58,25 @@ class NewProduct extends React.Component {
     addProduct(e) {
         e.preventDefault()
 
-        let product = this.makeProduct();
+        let message = '';
 
-        console.log('product')
-        console.log(product)
+        if (!this.state.barcode)
+            message += 'Barcode empty!\n';
 
-        let response = AddProduct(product);
+        if (!this.state.productName)
+            message += 'Product name empty!\n';
 
-        console.log('response')
-        console.log(response)
-        // this.props.history.push(`/search/${this.state.name}`);
+        if (!this.state.description)
+            message += 'Description empty!\n';
+
+        if (message) {
+            alert(message);
+        } else {
+            let product = this.makeProduct();
+            let response = AddProduct(product);
+            alert('Product added!')
+            this.props.history.push(`/search/`)
+        }
     }
 
     render() {
@@ -96,13 +105,13 @@ class NewProduct extends React.Component {
                     <div className={''}>
                         <form className={'form'}>
                             <label className={'form-label'}>Barcode:</label>
-                            <input type={'text'} name={'barcode'}
+                            <input type={'number'} name={'barcode'}
                                    autoComplete={'off'}
                                    onChange={this.handleChange}
                                    className={'form-input'}/>
 
                             <label className={'form-label'}>Name:</label>
-                            <input type={'text'} name={'name'}
+                            <input type={'text'} name={'productName'}
                                    autoComplete={'off'}
                                    onChange={this.handleChange}
                                    className={'form-input'}/>
@@ -112,10 +121,11 @@ class NewProduct extends React.Component {
                                       name={'description'}
                                       autoComplete={'off'}
                                       onChange={this.handleChange}
-                                      className={'contactInput'}/>
+                                      className={'form-textArea'}/>
 
                             <button className={'btn-blue'}
-                                    onClick={this.addProduct}>Add product
+                                    onClick={this.addProduct}>
+                                Add product
                             </button>
                         </form>
                     </div>
@@ -128,4 +138,4 @@ class NewProduct extends React.Component {
 
 }
 
-export default NewProduct;
+export default NewProductComponent;

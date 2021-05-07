@@ -4,16 +4,17 @@ import {BrowserRouter, Route, Switch} from "react-router-dom";
 import './index.css'
 import './style/Reset.css'
 
-import Navigation from "./components/navigation/NavigationComponent";
-import LoginComponent from "./components/login/LoginComponent";
-import Footer from "./components/footer/Footer";
-import RegisterComponent from "./components/login/RegisterComponent";
+import Navigation from "./components/NavigationComponent";
+import LoginComponent from "./components/LoginComponent";
+import FooterComponent from "./components/FooterComponent";
+import RegisterComponent from "./components/RegisterComponent";
 import About from "./components/about/About";
-import Contact from "./components/contact/Contact";
+import ContactComponent from "./components/ContactComponent";
 import Home from "./components/home/Home";
-import Search from "./components/search/Search";
-import AuthenticatedRoute from "./components/authentication/AuthenticatedRoute";
-import NewProduct from "./components/newProduct/NewProduct";
+import SearchComponent from "./components/SearchComponent";
+import AuthenticatedRoute from "./authentication/AuthenticatedRoute";
+import NewProductComponent from "./components/NewProductComponent";
+import ScannerComponent from "./components/scanner/ScannerComponent";
 
 export default function App() {
     return (
@@ -24,17 +25,19 @@ export default function App() {
                     <Switch>
                         <Route path={'/'} exact component={LoginComponent}/>
                         <Route path={'/home'} component={Home}/>
-                        <AuthenticatedRoute path={'/search/:productName'} component={Search}/>
-                        <AuthenticatedRoute path={'/search'} component={Search}/>
-                        <AuthenticatedRoute path={'/newProduct'} component={NewProduct}/>
+                        <AuthenticatedRoute path={'/search/:productName'} component={SearchComponent}/>
+                        <AuthenticatedRoute path={'/search'} component={SearchComponent}/>
+                        <AuthenticatedRoute path={'/newProduct'} component={NewProductComponent}/>
                         <Route path={'/about'} component={About}/>
-                        <Route path={'/contact'} component={Contact}/>
+                        <Route path={'/contact'} component={ContactComponent}/>
                         <Route path={'/login'} component={LoginComponent}/>
                         <Route path={'/register'} component={RegisterComponent}/>
+
+                        <AuthenticatedRoute path={'/camera/search'} component={ScannerComponent}/>
                     </Switch>
                 </div>
 
-                <Footer/>
+                <FooterComponent/>
             </>
         </BrowserRouter>
     )

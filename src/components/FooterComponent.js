@@ -1,9 +1,9 @@
 import React from 'react';
-import './Footer.css';
+import '../style/Footer.css';
 
 // stopka uzywana domyslnie na kazdej stronie
 
-class Footer extends React.Component {
+class FooterComponent extends React.Component {
     render() {
         return (
             <footer className={"footer"}>
@@ -13,4 +13,4 @@ class Footer extends React.Component {
     }
 }
 
-export default Footer;
+export default FooterComponent;

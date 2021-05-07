@@ -26,6 +26,7 @@
     padding: 2px;
     letter-spacing: 2px;
     margin-top: 10px;
+    display: block;
 }
 
 /*pole wprowadzane*/
@@ -88,4 +89,14 @@
     border-radius: 4px;
     box-shadow: 0 2px 20px rgba(1, 41, 112, 0.1);
     padding: 15px;
+}
+
+.form-textArea{
+    font-size: 15px;
+    letter-spacing: 2px;
+    padding: 7px;
+    border-radius: 4px;
+    border-color: var(--lightBlue);
+    resize: none;
+    width: 100%;
 }

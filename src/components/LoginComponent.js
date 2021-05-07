@@ -1,6 +1,6 @@
 import React from 'react';
 
-import '../../style/Form.css'
+import '../style/Form.css'
 import AuthenticationService from "../authentication/AuthenticationService";
 
 class LoginComponent extends React.Component {
@@ -51,7 +51,8 @@ class LoginComponent extends React.Component {
                        type={'password'}/>
 
                 <button className={'btn-blue'}
-                        onClick={this.loginClicked}>Login</button>
+                        onClick={this.loginClicked}>Login
+                </button>
             </form>
         )
     }

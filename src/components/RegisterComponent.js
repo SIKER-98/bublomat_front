@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../style/Form.css'
+import '../style/Form.css'
 
 class RegisterComponent extends React.Component {
 

@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+button.showProduct {
+    background-color: var(--blue);
+    color: var(--white);
+    border-radius: 4px;
+    font-size: 15px;
+    box-sizing: border-box;
+    line-height: 1;
+    padding: 8px 20px;
+    text-transform: uppercase;
+    cursor: pointer;
+    width: 180px;
+}
+
+button.showProduct:hover {
+    background-color: var(--lightBlue);
+}
+
+.rating-numbers{
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: space-around;
+    margin: 10px;
+}
+
+.rating-number{
+    display: block;
+    color: white;
+    font-weight: bold;
+    background-color: slategray;
+    padding: 10px 20px;
+    border-radius: 25%;
+    font-size: 20px;
+    margin: 0 5px;
+    font-family: 'Press Start 2P', sans-serif;
+    cursor:pointer;
+}
+
+.rating-0{
+    background-color: rgb(255,0,0);
+}
+.rating-1{
+    background-color: rgb(255,0,255);
+}
+.rating-2{
+    background-color: rgb(255,0,128);
+}
+.rating-3{
+    background-color: rgb(128,0,255);
+}
+.rating-4{
+    background-color: rgb(0,0,255);
+}
+.rating-5{
+    background-color: rgb(0,128,255);
+}
+.rating-6{
+    background-color: rgb(0,255,255);
+}
+.rating-7{
+    background-color: rgb(0,255,128);
+}
+.rating-8{
+    background-color: rgb(128,255,0);
+}
+.rating-9{
+    background-color: rgb(0,255,0);
+}
+
+
+
+
+
+
+

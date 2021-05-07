@@ -1,13 +1,13 @@
 import React from 'react';
 import {Link} from "react-router-dom";
 
-import './Search.css';
-// import {SearchProduct} from "../../api/ApiProduct";
-import ProductCard from "../productCard/ProductCard";
-import {FetchProduct, SearchProduct} from "../../api/ApiProduct";
+import '../style/Search.css';
+
+import ProductCardComponent from "./ProductCardComponent";
+import {FetchProduct, SearchProduct} from "../api/ApiProduct";
 
 
-class Search extends React.Component {
+class SearchComponent extends React.Component {
     constructor(props) {
         super(props);
 
@@ -22,21 +22,6 @@ class Search extends React.Component {
         this.searchClick = this.searchClick.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
-
-    comments = [
-        {
-            result: 8,
-            comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc orci ante, congue id nisi id."
-        },
-        {
-            result: 5,
-            comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc orci ante, congue id nisi id."
-        },
-        {
-            result: 3,
-            comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc orci ante, congue id nisi id."
-        },
-    ]
 
     //klikniecie przycisku wyszukiwania
     async searchClick() {
@@ -81,13 +66,12 @@ class Search extends React.Component {
                 <ul>
                     {this.state.products.map((product, i) => (
                             <li key={i} className={'content-box'}>
-                                <ProductCard key={product.id}
-                                             name={product.name}
-                                             description={product.description}
-                                             rating={product.rating}
-                                    // img={product.img}
-                                             img={"/img/wisnia.jpg"}
-                                             comments={this.comments}
+                                <ProductCardComponent key={product.id}
+                                                      id={product.id}
+                                                      name={product.productName}
+                                                      description={product.description}
+                                                      rating={product.rating}
+                                                      img={"/img/wisnia.jpg"}
                                 />
                             </li>
                         )
@@ -100,4 +84,4 @@ class Search extends React.Component {
 
 }
 
-export default Search;
+export default SearchComponent;
