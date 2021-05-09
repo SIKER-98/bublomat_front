@@ -8,6 +8,8 @@ export default function About() {
         <div className={'about'}>
             <Person personImage={'./img/sikor.jpg'}
                     personName={'Hubert Sikorski'}/>
+            <Person personImage={'./img/gorko.jpg'}
+                    personName={'Maksymilian Górko'}/>
             <Person personImage={'./img/wasiluk.jpg'}
                     personName={'Rafał Wasiluk'}/>
             <Person personImage={'./img/ksenia.jpg'}
@@ -16,8 +18,6 @@ export default function About() {
                     personName={'Kamil Krzyzanowski'}/>
             <Person personImage={'./img/mohr.jpg'}
                     personName={'Mateusz Mohr'}/>
-            <Person personImage={'./img/gorko.jpg'}
-                    personName={'Maksymilian Górko'}/>
             <Person personImage={'./img/wisnia.jpg'}
                     personName={'Kamil Wiśniewski'}/>
         </div>

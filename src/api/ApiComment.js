@@ -1,5 +1,4 @@
 import axios from './axiosHelper'
-import ProductModel from "../models/CommentModel";
 
 /// Pobranie wszystkich komentarzy
 /// return: tablica komentarzy
@@ -11,7 +10,7 @@ async function FetchComments() {
         .then(res => {
             console.log(JSON.parse(res.request.response))
             comments = JSON.parse(res.request.response)
-        })
+        }).catch(e => alert('Problem with ApiComponent-FetchComments: ' + e.message()))
 
     return comments;
 }
@@ -26,7 +25,7 @@ async function ProductComments(idProduct) {
     await axios.get(api, {params: {id: idProduct}})
         .then(res => {
             comments = JSON.parse(res.request.response);
-        })
+        }).catch(e => alert('Problem with ApiComponent-ProductComments: ' + e.message()))
 
     return comments;
 }
@@ -36,7 +35,6 @@ async function ProductComments(idProduct) {
 /// return komentarz
 async function AddComment(newComment) {
     const api = '/comments/addcomment';
-    let comment;
 
     await axios.post(api, {
         'commentId': newComment.commentId,
@@ -46,8 +44,7 @@ async function AddComment(newComment) {
         'rate': newComment.rate
     }).then(res => {
         console.log(res.request.response);
-        comment = JSON.parse(res.request.response);
-    })
+    }).catch(e => alert('Problem with ApiComponent-AddComment: ' + e.message()))
 }
 
 

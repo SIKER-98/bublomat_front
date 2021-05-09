@@ -9,7 +9,7 @@ class NewProductComponent extends React.Component {
 
         this.state = {
             barcode: -1,
-            name: '',
+            productName: '',
             description: '',
             imageSource: '',
             image: './logo192.png'
@@ -47,7 +47,7 @@ class NewProductComponent extends React.Component {
     makeProduct() {
         let product = new ProductModel();
         product.id = this.state.barcode;
-        product.productName = this.state.name;
+        product.productName = this.state.productName;
         product.description = this.state.description;
         product.img = this.state.imageSource;
         product.rating = 0
@@ -74,6 +74,7 @@ class NewProductComponent extends React.Component {
         } else {
             let product = this.makeProduct();
             let response = AddProduct(product);
+            console.log(response)
             alert('Product added!')
             this.props.history.push(`/search/`)
         }

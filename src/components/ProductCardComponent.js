@@ -1,6 +1,6 @@
 import '../style/ProductCard.css';
 import React, {Component} from "react";
-import {AddComment, FetchComments, ProductComments} from "../api/ApiComment";
+import {AddComment, ProductComments} from "../api/ApiComment";
 import CommentModel from "../models/CommentModel";
 
 class ProductCardComponent extends Component {
@@ -35,11 +35,12 @@ class ProductCardComponent extends Component {
         comments.map(comment => {
             sum += comment.rate;
             count++;
+            return comment;
         })
 
         let rate = count === 0 ? 0 : sum / count;
 
-        this.setState({productRate: rate.toFixed(0)})
+        this.setState({productRate: rate.toFixed(2)})
     }
 
     async getComments() {
@@ -81,11 +82,13 @@ class ProductCardComponent extends Component {
         const number = event.target;
 
         if (this.state.rateRef != null) {
-            this.state.rateRef.className = 'rating-number';
+            let rateRef = this.state.rateRef;
+            rateRef.className = 'rating-number';
+            this.setState({rateRef: rateRef});
         }
 
-        this.state.userRate = number.innerHTML * 1;
-        this.state.rateRef = number;
+        this.setState({userRate: number.innerHTML * 1})
+        this.setState({rateRef: number});
 
         number.className = `rating-number rating-${number.innerHTML}`;
     }
