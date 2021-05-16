@@ -3,6 +3,8 @@
     max-width: 800px;
     margin: 30px auto;
     display: flex;
+    flex-direction: row;
+
     flex-wrap: wrap;
     box-sizing: border-box;
     padding: 10px;
@@ -24,3 +26,16 @@
     font-weight: bold;
 }
 
+.statistic-box{
+    box-sizing: border-box;
+    flex-basis: 40%;
+    font-size: 20px;
+    border-radius: 4px;
+    box-shadow: 0 2px 20px rgba(1, 41, 112, 0.1);
+    padding: 50px;
+    margin-top:30px;
+}
+
+.statistic-box span{
+    font-weight: bold;
+}

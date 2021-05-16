@@ -1,0 +1,66 @@
+.content-box-full {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0 auto 30px;
+  text-align: center;
+  padding: 10px 50px 20px;
+  box-shadow: 0 2px 20px rgba(1, 41, 112, 0.1);
+}
+
+.table-admin {
+  font-size: 16px;
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  line-height: 1.5;
+}
+.table-admin span {
+  color: red;
+  font-weight: bold;
+}
+.table-admin thead th {
+  padding: 11px 8px;
+  background: #4CAF50;
+  color: white;
+}
+.table-admin tbody tr td {
+  padding: 8px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+.table-admin button {
+  width: 100%;
+  line-height: 2;
+  text-transform: uppercase;
+  margin: 5px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+.table-admin button.btn-orange {
+  background: orange;
+  color: white;
+  border: none;
+}
+.table-admin button.btn-orange:hover {
+  background-color: chocolate;
+}
+.table-admin button.btn-red {
+  background: red;
+  color: white;
+  border: none;
+}
+.table-admin button.btn-red:hover {
+  background-color: firebrick;
+}
+.table-admin button.btn-green {
+  background: forestgreen;
+  color: white;
+  border: none;
+}
+.table-admin button.btn-green:hover {
+  background-color: limegreen;
+}
+
+/*# sourceMappingURL=Admin.css.map */

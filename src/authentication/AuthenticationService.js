@@ -1,9 +1,10 @@
 /// klasa sluzaca do logowania i pobierania informacji o logowaniu
 class AuthenticationService {
     // stworzenie sesji logowania
-    loginSuccessful(username, userId) {
+    loginSuccessful(username, userId, role) {
         sessionStorage.setItem('user', username);
         sessionStorage.setItem('userId', userId)
+        sessionStorage.setItem('role', role)
     }
 
     // usuniecie sesji logowania
@@ -16,7 +17,15 @@ class AuthenticationService {
     isUserLoggedIn() {
         let user = sessionStorage.getItem('user');
         let userId = sessionStorage.getItem('userId');
-        return user !== null && userId !== null;
+        let role = sessionStorage.getItem('role');
+        return user !== null && userId !== null && role !== null
+    }
+
+    isAdminLoggedIn() {
+        let user = sessionStorage.getItem('user');
+        let userId = sessionStorage.getItem('userId');
+        let role = sessionStorage.getItem('role');
+        return user !== null && userId !== null && role === 'admin';
     }
 }
 

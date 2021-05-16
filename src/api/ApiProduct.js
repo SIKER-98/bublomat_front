@@ -39,8 +39,10 @@ async function SearchProduct(productName) {
 /// return: dodany produkt
 async function AddProduct(newProduct) {
     const api = '/products/addproducts'
-    let product;
+    // let product;
+    console.log('test')
 
+    let code;
 
     await axios.post(api, {
         "id": newProduct.id,
@@ -50,10 +52,11 @@ async function AddProduct(newProduct) {
         "img": newProduct.img,
     })
         .then(res => {
-            product = JSON.parse(res.request.response)
+            code = res.status;
+            // product = JSON.parse(res.request.response)
         })
 
-    return product;
+    return code;
 }
 
 /// Wyszukiwanie produktu po jego id
@@ -72,39 +75,14 @@ async function GetProductById(id) {
     return products;
 }
 
-/// Dodanie oceny do produktu
-/// input produkt, id uzytkownik
-/// return produkt po ocenie
-// function RateProduct(productName, userId) {
-//     const [product, setProduct] = useState(null);
-//
-//     useEffect(() => {
-//         axios.pull(apiProduct, {params: {product: productName, userId: userId}})
-//             .then(res => {
-//                 let product = createProduct(JSON.parse(res));
-//                 setProduct(product);
-//             })
-//     })
-//
-//     console.log(product);
-//     return product
-// }
+async function DeleteProduct(id) {
+    const api = 'products/delete';
+    let response;
 
+    await axios.delete(api, {params: {id: id}})
+        .then(res => response = res);
 
-export {FetchProduct, SearchProduct, AddProduct,GetProductById};
+    return response.status
+}
 
-/// stworzenie produktu z JSON-a
-// function createProduct(obj) {
-//     console.log(obj)
-//
-//     let product = new ProductModel();
-//     product.id = obj.id;
-//     product.productName = obj.productName;
-//     product.description = obj.description;
-//     product.rating = obj.rating;
-//     product.img = obj.img;
-//
-//     console.log("product " + product)
-//
-//     return product;
-// }
+export {FetchProduct, SearchProduct, AddProduct, GetProductById, DeleteProduct};

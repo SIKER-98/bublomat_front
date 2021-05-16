@@ -73,10 +73,19 @@ class NewProductComponent extends React.Component {
             alert(message);
         } else {
             let product = this.makeProduct();
-            let response = AddProduct(product);
-            console.log(response)
-            alert('Product added!')
-            this.props.history.push(`/search/`)
+            let responseCode = AddProduct(product);
+
+            const pointer = this;
+
+            responseCode.then(function (result){
+                if (result === 200) {
+                    alert('Product added!')
+                    pointer.props.history.push(`/search/`)
+                } else {
+                    alert('Catching problem! Try again');
+                }
+            })
+
         }
     }
 

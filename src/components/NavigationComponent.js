@@ -9,6 +9,7 @@ import {withRouter} from 'react-router'
 class NavigationComponent extends React.Component {
     render() {
         const isUserLoggedIn = AuthenticationService.isUserLoggedIn();
+        const isAdminLoggedIn = AuthenticationService.isAdminLoggedIn();
 
         return (
             <header className={'navbar'}>
@@ -45,6 +46,15 @@ class NavigationComponent extends React.Component {
                             <Link to={'/register'}
                                   className={'navbar-nav-item'}>Register</Link>
                         </li>}
+
+                        {isAdminLoggedIn &&
+                        <li>
+                            <Link to={'/manageproduct'}
+                                  className={'navbar-nav-item'}>Manage</Link>
+                        </li>
+                        }
+
+
                         {isUserLoggedIn &&
                         <li>
                             <Link to={'/home'}

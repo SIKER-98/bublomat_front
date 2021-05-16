@@ -7,10 +7,18 @@ import AuthenticationService from "./AuthenticationService";
 // komponent majacy za zadanie przekierowac niezalogowanych uzytkownikow do komponentu logowania
 class AuthenticatedRoute extends Component {
     render() {
-        if (AuthenticationService.isUserLoggedIn()) {
-            return <Route {...this.props}/>;
-        } else {
-            return <Redirect to={'/login'}/>;
+        if(this.props.role==='admin'){
+            if(AuthenticationService.isAdminLoggedIn()){
+                return <Route {...this.props}/>;
+            }else{
+                return <Redirect to={'/home'}/>;
+            }
+        }else {
+            if (AuthenticationService.isUserLoggedIn()) {
+                return <Route {...this.props}/>;
+            } else {
+                return <Redirect to={'/login'}/>;
+            }
         }
     }
 }

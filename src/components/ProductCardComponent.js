@@ -14,6 +14,9 @@ class ProductCardComponent extends Component {
             userComment: '',
             rateRef: null,
             comments: [],
+            commentsInMemory: [],
+            commentsPage: 1,
+            maxCommentsPage: 0,
         }
 
         this.toggleProductsClick = this.toggleProductsClick.bind(this)
@@ -23,10 +26,13 @@ class ProductCardComponent extends Component {
         this.handleChange = this.handleChange.bind(this)
         this.getComments = this.getComments.bind(this)
         this.calculateRate = this.calculateRate.bind(this)
+        this.moreComments = this.moreComments.bind(this)
     }
 
     componentDidMount() {
-        this.getComments();
+        this.getComments().then(r => {
+            // console.log(`Comments received to product ${this.props.id}`)
+        });
     }
 
     calculateRate(comments) {
@@ -46,14 +52,21 @@ class ProductCardComponent extends Component {
     async getComments() {
         let comments = await ProductComments(this.props.id);
         this.calculateRate(comments);
-        this.setState({comments: comments});
+
+        const maxPage = Math.ceil(comments.length / 5);
+
+        this.setState({
+            maxCommentsPage: maxPage,
+            commentsInMemory: comments.slice(0, 5),
+            comments: comments
+        })
     }
 
 
     // pokazanie lub schowanie komentarzy
     toggleProductsClick() {
         this.getComments().then(() => this.setState({showComments: !this.state.showComments,}))
-
+        this.setState({commentsPage: 0})
     }
 
     setRatingColour(rating) {
@@ -87,10 +100,22 @@ class ProductCardComponent extends Component {
             this.setState({rateRef: rateRef});
         }
 
-        this.setState({userRate: number.innerHTML * 1})
-        this.setState({rateRef: number});
+        this.setState({
+            userRate: number.innerHTML * 1,
+            rateRef: number,
+        })
 
         number.className = `rating-number rating-${number.innerHTML}`;
+    }
+
+    moreComments() {
+        const comments = this.state.comments;
+        const page = (this.state.commentsPage+1)%this.state.maxCommentsPage;
+
+        this.setState({
+            commentsPage: (this.state.commentsPage + 1)%this.state.maxCommentsPage,
+            commentsInMemory: comments.slice((page) * 5, (page + 1) * 5)
+        });
     }
 
     ratingRender() {
@@ -146,7 +171,7 @@ class ProductCardComponent extends Component {
                     <>
                         <h1>Latest comments:</h1>
                         <ul>
-                            {this.state.comments.map((comment) => (
+                            {this.state.commentsInMemory.map((comment) => (
                                 <li key={comment.commentId}>
                                     <h2 className={this.setRatingColour(comment.rate)}>Rate: {comment.rate}</h2>
                                     <p>{comment.content}</p>
@@ -154,6 +179,13 @@ class ProductCardComponent extends Component {
                             ))}
                         </ul>
 
+                        {this.state.comments.length >= 5 &&
+                        <div className={'flex-center'}>
+                            <button className={'btn-blue'}
+                                    onClick={this.moreComments}>
+                                Load more comments
+                            </button>
+                        </div>}
                     </>
                 }
             </div>

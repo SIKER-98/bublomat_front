@@ -16,11 +16,18 @@ class SearchComponent extends React.Component {
 
         this.state = {
             searchedProduct: this.props.match.params.productName,
+            selectedPage: 0,
+            productsInMemory: [],
             products: [],
         }
 
         this.searchClick = this.searchClick.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.renderPageButtons = this.renderPageButtons.bind(this);
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        window.scrollTo(0, 0);
     }
 
     //klikniecie przycisku wyszukiwania
@@ -34,6 +41,7 @@ class SearchComponent extends React.Component {
             products = await FetchProduct();
         }
 
+        this.setState({productsInMemory: products.slice(0, 5)})
         this.setState({products: products})
     }
 
@@ -42,10 +50,39 @@ class SearchComponent extends React.Component {
         this.setState({[event.target.name]: event.target.value});
     }
 
+    changePage(pageButton) {
+        const pageNumber = pageButton.pageNumber;
+
+        this.setState({selectedPage: pageNumber})
+        this.setState({productsInMemory: this.state.products.slice(5 * pageNumber, 5 * (pageNumber + 1))})
+    }
+
+    renderPageButtons() {
+        const pageCount = Math.ceil(this.state.products.length / 5);
+
+        let buttons = [];
+        for (let i = 0; i < pageCount; i++) {
+            buttons.push(
+                <button className={this.state.selectedPage === i ? 'btn-page-active' : 'btn-page'}
+                        key={i}
+                        onClick={() => this.changePage({pageNumber: i})}
+                        name={i}>
+                    {i + 1}
+                </button>)
+        }
+
+        return buttons;
+    }
+
     render() {
         return (
+
             <>
-                <div className={'content-box'}>
+                <div className={
+                    'content-box'
+                }
+
+                >
                     <label className={'form-label'}>Input product name or code:</label>
                     <input name={'searchedProduct'}
                            value={this.state.searchedProduct}
@@ -64,7 +101,7 @@ class SearchComponent extends React.Component {
                 </div>
 
                 <ul>
-                    {this.state.products.map((product, i) => (
+                    {this.state.productsInMemory.map((product, i) => (
                             <li key={i} className={'content-box'}>
                                 <ProductCardComponent key={product.id}
                                                       id={product.id}
@@ -78,10 +115,15 @@ class SearchComponent extends React.Component {
                     )}
                 </ul>
 
+                {
+                    this.state.products.length >= 5 &&
+                    <div className={'page-list'}>
+                        {this.renderPageButtons()}
+                    </div>
+                }
             </>
         )
     }
-
 }
 
 export default SearchComponent;

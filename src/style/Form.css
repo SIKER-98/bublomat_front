@@ -20,6 +20,39 @@
     background-color: var(--lightBlue);
 }
 
+.btn-page{
+    display: block;
+
+    background-color: var(--blue);
+    color: var(--white);
+    font-size: 20px;
+    box-sizing: border-box;
+    padding: 5px 10px;
+    margin: 3px 5px 15px 5px;
+    border-radius: 20%;
+}
+
+.btn-page:hover {
+    background-color: var(--lightBlue);
+}
+
+.btn-page-active{
+    display: block;
+
+    background-color: #012970;
+    color: var(--white);
+    font-size: 20px;
+    box-sizing: border-box;
+    padding: 5px 10px;
+    margin: 3px 5px 15px 5px;
+    border-radius: 20%;
+}
+
+.page-list{
+    display: flex;
+    justify-content: center;
+}
+
 /*tytul pola*/
 .form-label {
     font-size: 15px;
@@ -100,3 +133,9 @@
     resize: none;
     width: 100%;
 }
+
+.flex-center{
+    display: flex;
+    justify-content: center;
+}
+

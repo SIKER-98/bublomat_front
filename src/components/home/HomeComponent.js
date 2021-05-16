@@ -3,7 +3,7 @@ import './Home.css';
 import {FetchProduct} from "../../api/ApiProduct";
 import {FetchComments} from "../../api/ApiComment";
 
-class Home extends React.Component {
+class HomeComponent extends React.Component {
     constructor(props) {
         super(props);
 
@@ -34,13 +34,13 @@ class Home extends React.Component {
         let good = 0;
         let nice = 0;
 
-        products.map((product) => {
+        products.forEach((product) => {
             let productComments = comments.filter(comment => comment.idProduct === product.id)
 
             let sum = 0;
             let count = 0;
 
-            productComments.map(comment => {
+            productComments.forEach(comment => {
                 sum += comment.rate;
                 count++;
             })
@@ -64,23 +64,15 @@ class Home extends React.Component {
     render() {
         return (
             <div className={'home'}>
-                <p>products: {this.state.products}</p>
-                <p>comments: {this.state.comments}</p>
-                <p>bubels: {this.state.bubels}</p>
-                <p>good: {this.state.good}</p>
-                <p>nice: {this.state.nice}</p>
-                <p>ratio: {this.state.ratio}</p>
-
-                <div className={'homeBox'}>Total number of all BUBLES in our
-                    database: <span>{this.state.products}</span></div>
-                <div className={'homeBox'}>Total number of all products: <span>5401</span></div>
-                <div className={'homeBox'}>Number of new products added to the database today: <span>13</span></div>
-                <div className={'homeBox'}>Number of user reviews: <span>51321</span></div>
-                <div className={'homeBox'}>Testowy tekst przeznaczony do prezentacji kontenerów</div>
-                <div className={'homeBox'}>Testowy tekst przeznaczony do prezentacji kontenerów</div>
+                <div className={'statistic-box'}>Quantity of all products: <span>{this.state.products}</span></div>
+                <div className={'statistic-box'}>Number of all comments: <span>{this.state.comments}</span></div>
+                <div className={'statistic-box'}>Number of products recognized as bubbles: <span>{this.state.bubels}</span></div>
+                <div className={'statistic-box'}>Number of products recognized as good: <span>{this.state.good}</span></div>
+                <div className={'statistic-box'}>Number of products recognized as super: <span>{this.state.nice}</span></div>
+                <div className={'statistic-box'}>The ratio of posts to comments: <span>{this.state.ratio}</span></div>
             </div>
         )
     }
 }
 
-export default Home;
+export default HomeComponent;
