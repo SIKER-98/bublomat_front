@@ -18,32 +18,38 @@ import ScannerComponent from "./components/scanner/ScannerComponent";
 import AdminProductComponent from "./components/admin/AdminProductComponent";
 import AdminCommentComponent from "./components/admin/AdminCommentComponent";
 
+
+
 export default function App() {
     return (
-        <BrowserRouter>
-            <>
-                <Navigation/>
-                <div className={'content'}>
-                    <Switch>
-                        <Route path={'/'} exact component={LoginComponent}/>
-                        <Route path={'/home'} component={HomeComponent}/>
-                        <AuthenticatedRoute path={'/search/:productName'} component={SearchComponent}/>
-                        <AuthenticatedRoute path={'/search'} component={SearchComponent}/>
-                        <AuthenticatedRoute path={'/newProduct'} component={NewProductComponent}/>
-                        <Route path={'/about'} component={About}/>
-                        <Route path={'/contact'} component={ContactComponent}/>
-                        <Route path={'/login'} component={LoginComponent}/>
-                        <Route path={'/register'} component={RegisterComponent}/>
+        <>
+            <BrowserRouter>
+                <>
+                    <Navigation/>
+                    <div className={'content'}>
+                        <Switch>
+                            <Route path={'/'} exact component={LoginComponent}/>
+                            <Route path={'/home'} component={HomeComponent}/>
+                            <AuthenticatedRoute path={'/search/:productName'} component={SearchComponent}/>
+                            <AuthenticatedRoute path={'/search'} component={SearchComponent}/>
+                            <AuthenticatedRoute path={'/newProduct'} component={NewProductComponent}/>
+                            <Route path={'/about'} component={About}/>
+                            <Route path={'/contact'} component={ContactComponent}/>
+                            <Route path={'/login'} component={LoginComponent}/>
+                            <Route path={'/register'} component={RegisterComponent}/>
 
-                        <AuthenticatedRoute path={'/camera/search'} component={ScannerComponent}/>
+                            <AuthenticatedRoute path={'/camera/search'} component={ScannerComponent}/>
 
-                        <AuthenticatedRoute path={'/manageProduct'} component={AdminProductComponent} role={'admin'}/>
-                        <AuthenticatedRoute path={'/manageComment'} component={AdminCommentComponent} role={'admin'}/>
-                    </Switch>
-                </div>
+                            <AuthenticatedRoute path={'/manageProduct'} component={AdminProductComponent}
+                                                role={'admin'}/>
+                            <AuthenticatedRoute path={'/manageComment'} component={AdminCommentComponent}
+                                                role={'admin'}/>
+                        </Switch>
+                    </div>
 
-                <FooterComponent/>
-            </>
-        </BrowserRouter>
+                    <FooterComponent/>
+                </>
+            </BrowserRouter>
+        </>
     )
 }

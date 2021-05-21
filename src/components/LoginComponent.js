@@ -2,6 +2,7 @@ import React from 'react';
 
 import '../style/Form.css'
 import AuthenticationService from "../authentication/AuthenticationService";
+import {GetAccessToken} from "../api/ApiUser";
 
 class LoginComponent extends React.Component {
     constructor(props) {
@@ -25,16 +26,20 @@ class LoginComponent extends React.Component {
     // przycisk logowania
     loginClicked(event) {
         event.preventDefault();
-        if (this.state.username === 'user' && this.state.password === 'user') {
-            AuthenticationService.loginSuccessful(this.state.username, '1', 'user');
-            this.props.history.push('/home');
-        } else if (this.state.username === 'admin' && this.state.password === 'admin') {
-            AuthenticationService.loginSuccessful(this.state.username, '2', 'admin');
-            this.props.history.push('/manageProduct');
-        } else {
-            this.setState({hasLoginFailed: true});
-            alert('Invalid login or password')
-        }
+
+        GetAccessToken("test@test.test",'test')
+
+
+        // if (this.state.username === 'user' && this.state.password === 'user') {
+        //     AuthenticationService.loginSuccessful(this.state.username, '1', 'user');
+        //     this.props.history.push('/home');
+        // } else if (this.state.username === 'admin' && this.state.password === 'admin') {
+        //     AuthenticationService.loginSuccessful(this.state.username, '2', 'admin');
+        //     this.props.history.push('/manageProduct');
+        // } else {
+        //     this.setState({hasLoginFailed: true});
+        //     alert('Invalid login or password')
+        // }
     }
 
     render() {
