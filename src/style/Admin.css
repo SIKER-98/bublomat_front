@@ -63,4 +63,49 @@
   background-color: limegreen;
 }
 
+.popup-box {
+  position: fixed;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  display: flex;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 800px;
+  background-color: white;
+  border: 1px solid black;
+}
+.popup-box label {
+  padding: 10px;
+}
+.popup-box input, .popup-box textarea {
+  margin: 8px;
+  padding: 5px;
+}
+.popup-box button {
+  width: 95%;
+  line-height: 2;
+  text-transform: uppercase;
+  margin: 5px auto;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+.popup-box button.btn-red {
+  background: red;
+  color: white;
+  border: none;
+}
+.popup-box button.btn-red:hover {
+  background-color: firebrick;
+}
+.popup-box button.btn-green {
+  background: forestgreen;
+  color: white;
+  border: none;
+}
+.popup-box button.btn-green:hover {
+  background-color: limegreen;
+}
+
 /*# sourceMappingURL=Admin.css.map */

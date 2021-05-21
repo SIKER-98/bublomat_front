@@ -24,11 +24,18 @@ class LoginComponent extends React.Component {
     }
 
     // przycisk logowania
-    loginClicked(event) {
+    async loginClicked(event) {
         event.preventDefault();
 
-        GetAccessToken("test@test.test",'test')
+        let status = await GetAccessToken("test@test.test",'test')
 
+        if(status===200){
+                AuthenticationService.loginSuccessful(this.state.username, '2', 'admin');
+                this.props.history.push('/search/');
+        }else{
+                this.setState({hasLoginFailed: true});
+                alert('Invalid login or password')
+        }
 
         // if (this.state.username === 'user' && this.state.password === 'user') {
         //     AuthenticationService.loginSuccessful(this.state.username, '1', 'user');
@@ -45,12 +52,12 @@ class LoginComponent extends React.Component {
     render() {
         return (
             <form className={'form'}>
-                <label className={'form-label'}>Nickname:</label>
+                <label className={'form-label'}>Email address:</label>
                 <input name={'username'}
                        autoComplete={'off'}
                        onChange={this.handleChange}
                        className={`form-input ${this.state.hasLoginFailed ? 'form-input-wrong' : ''}`}
-                       type={'text'}/>
+                       type={'email'}/>
 
                 <label className={'form-label'}>Password:</label>
                 <input name={'password'}

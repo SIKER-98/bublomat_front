@@ -80,3 +80,58 @@
     }
   }
 }
+
+.popup-box {
+  position: fixed;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  display: flex;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 800px;
+  background-color: white;
+  border: 1px solid black;
+
+  label{
+    padding: 10px;
+  }
+
+  input, textarea{
+    margin: 8px;
+    padding: 5px;
+  }
+
+  button {
+    width: 95%;
+    line-height: 2;
+    text-transform: uppercase;
+    margin: 5px auto;
+    font-weight: bold;
+    letter-spacing: 1px;
+
+    &.btn-red {
+      background: red;
+      color: white;
+      border: none;
+
+      &:hover {
+        background-color: firebrick;
+      }
+    }
+
+    &.btn-green {
+      background: forestgreen;
+      color: white;
+      border: none;
+
+      &:hover {
+        background-color: limegreen;
+      }
+    }
+  }
+}
+
+

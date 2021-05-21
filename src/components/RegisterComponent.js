@@ -1,5 +1,7 @@
 import React from 'react';
 import '../style/Form.css'
+import {Register} from "../api/ApiUser";
+import AuthenticationService from "../authentication/AuthenticationService";
 
 class RegisterComponent extends React.Component {
 
@@ -7,13 +9,15 @@ class RegisterComponent extends React.Component {
         super(props);
 
         this.state = {
-            username: '',
+            firstName: '',
+            secondName: '',
             password: '',
             confirmedPassword: '',
             email: '',
         }
 
-        this.username = document.getElementsByName('username');
+        this.firstName = document.getElementsByName('firstName');
+        this.secondName = document.getElementsByName('secondName');
         this.password = document.getElementsByName('password');
         this.confirmedPassword = document.getElementsByName('confirmedPassword');
         this.email = document.getElementsByName('email');
@@ -51,11 +55,12 @@ class RegisterComponent extends React.Component {
     }
 
     // obsluga przycisku rejestracji
-    registerClicked(event) {
+    async registerClicked(event) {
         event.preventDefault();
         const state = this.state;
 
-        this.validateInputRequired(this.username, state.username);
+        this.validateInputRequired(this.firstName, state.firstName);
+        this.validateInputRequired(this.secondName, state.secondName);
         this.validateInputRequired(this.password, state.password);
         this.validateInputRequired(this.confirmedPassword, state.confirmedPassword);
         this.validateInputRequired(this.email, state.email);
@@ -67,10 +72,17 @@ class RegisterComponent extends React.Component {
         }
 
 
-        if (state.username && state.password && state.confirmedPassword && state.email) {
+        if (state.firstName && state.secondName && state.password && state.confirmedPassword && state.email) {
             if (state.password === state.confirmedPassword) {
-                console.log(state);
-                this.props.history.push('/login');
+
+                const status = await Register(this.state.firstName, this.state.secondName, this.state.password, this.state.email)
+
+                if(status === 200){
+                    AuthenticationService.loginSuccessful(this.state.email, '2', 'admin');
+                    this.props.history.push('/search/');
+                }else{
+                    alert('Something went wrong, try again later')
+                }
             }
         }
     }
@@ -78,8 +90,15 @@ class RegisterComponent extends React.Component {
     render() {
         return (
             <form className={'form'}>
-                <label className={'form-label'}>Nickname:</label>
-                <input name={'username'}
+                <label className={'form-label'}>First name:</label>
+                <input name={'firstName'}
+                       type={'text'}
+                       autoComplete={'off'}
+                       onChange={this.handleChange}
+                       className={'form-input'}/>
+
+                <label className={'form-label'}>Last name:</label>
+                <input name={'secondName'}
                        type={'text'}
                        autoComplete={'off'}
                        onChange={this.handleChange}

@@ -9,9 +9,8 @@ async function FetchProduct() {
 
     await axios.get(api)
         .then(res => {
-            // console.log(JSON.parse(res.request.response))
             products = JSON.parse(res.request.response)
-        })
+        }).catch(e => console.log(e))
 
 
     return products;
@@ -39,8 +38,6 @@ async function SearchProduct(productName) {
 /// return: dodany produkt
 async function AddProduct(newProduct) {
     const api = '/products/addproducts'
-    // let product;
-    console.log('test')
 
     let code;
 
@@ -50,6 +47,7 @@ async function AddProduct(newProduct) {
         "description": newProduct.description,
         "rating": newProduct.rating,
         "img": newProduct.img,
+
     })
         .then(res => {
             code = res.status;
@@ -85,4 +83,33 @@ async function DeleteProduct(id) {
     return response.status
 }
 
-export {FetchProduct, SearchProduct, AddProduct, GetProductById, DeleteProduct};
+async function EditProduct(product) {
+    const api = 'products/updateproduct?'
+
+    console.log(product)
+    let status = 0
+
+    // await axios.patch(api, {
+    //     id:product.id,
+    //     productname:product.productName,
+    //     description:product.description,
+    //     rating:0.0,
+    //     img:""
+    // })
+    //     .then(res=>{
+    //         console.log(res)
+    //         status = res.status
+    //     })
+    const params=new URLSearchParams(product).toString()
+    console.log(params)
+
+    await axios.patch(api+params)
+        .then(res => {
+            console.log(res)
+            status = res.status
+        })
+
+    return status;
+}
+
+export {FetchProduct, SearchProduct, AddProduct, GetProductById, DeleteProduct, EditProduct};

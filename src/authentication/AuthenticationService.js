@@ -11,6 +11,8 @@ class AuthenticationService {
     logout() {
         sessionStorage.removeItem('user');
         sessionStorage.removeItem('userId')
+        sessionStorage.removeItem('token')
+        window.accessToken = ''
     }
 
     // pobranie informacji czy uzytkownik jest zalogowany

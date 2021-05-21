@@ -8,9 +8,8 @@ async function FetchComments() {
 
     await axios.get(api)
         .then(res => {
-            console.log(JSON.parse(res.request.response))
             comments = JSON.parse(res.request.response)
-        }).catch(e => alert('Problem with ApiComponent-FetchComments: ' + e))
+        }).catch(e => console.log(e))
 
     return comments;
 }
@@ -57,5 +56,38 @@ async function DeleteComment(id) {
     return response.status
 }
 
+async function EditComment(comment) {
+    const api = 'comments/updatecomment?'
 
-export {FetchComments, AddComment, ProductComments, DeleteComment};
+    console.log(comment)
+    let status = 0
+
+    // await axios.patch(api, {
+    //     id:product.id,
+    //     productname:product.productName,
+    //     description:product.description,
+    //     rating:0.0,
+    //     img:""
+    // })
+    //     .then(res=>{
+    //         console.log(res)
+    //         status = res.status
+    //     })
+    const params=new URLSearchParams({
+        id:comment.commentId,
+        content:comment.content,
+        rating:comment.rate
+    }).toString()
+    console.log(params)
+
+    await axios.patch(api+params)
+        .then(res => {
+            console.log(res)
+            status = res.status
+        })
+
+    return status;
+}
+
+
+export {FetchComments, AddComment, ProductComments, DeleteComment, EditComment};
