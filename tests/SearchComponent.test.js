@@ -1,7 +1,13 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import SearchComponent from "../src/components/SearchComponent";
+import SearchComponent from "./SearchComponent";
+
+const match = {
+    params: {
+        productName: "Nazwa"
+    }
+};
 
 it('renders without crashing', () => {
-    shallow(<SearchComponent />);
+    shallow(<SearchComponent match/>);
 });
