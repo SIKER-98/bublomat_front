@@ -35,13 +35,12 @@ async function ProductComments(idProduct) {
 async function AddComment(newComment) {
     const api = '/comments/addcomment';
 
-    await axios.post(api, {
-        'commentId': newComment.commentId,
-        'idProduct': newComment.idProduct,
-        'idUser': newComment.idUser,
-        'content': newComment.content,
-        'rate': newComment.rate
-    }).then(res => {
+
+    newComment.idUser = newComment.idUser * 1
+    console.log(newComment)
+
+    await axios.post(api, newComment,{}
+    ).then(res => {
         console.log(res.request.response);
     }).catch(e => alert('Problem with ApiComponent-AddComment: ' + e))
 }
@@ -73,14 +72,14 @@ async function EditComment(comment) {
     //         console.log(res)
     //         status = res.status
     //     })
-    const params=new URLSearchParams({
-        id:comment.commentId,
-        content:comment.content,
-        rating:comment.rate
+    const params = new URLSearchParams({
+        id: comment.commentId,
+        content: comment.content,
+        rating: comment.rate
     }).toString()
     console.log(params)
 
-    await axios.patch(api+params)
+    await axios.patch(api + params)
         .then(res => {
             console.log(res)
             status = res.status

@@ -1,0 +1,8 @@
+{
+  "realm": "Bublomat",
+  "auth-server-url": "http://localhost:3000/login",
+  "ssl-required": "external",
+  "resource": "my-react-client",
+  "public-client": true,
+  "confidential-port": 0
+}

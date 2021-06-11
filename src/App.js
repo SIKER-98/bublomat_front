@@ -17,6 +17,8 @@ import NewProductComponent from "./components/NewProductComponent";
 import ScannerComponent from "./components/scanner/ScannerComponent";
 import AdminProductComponent from "./components/admin/AdminProductComponent";
 import AdminCommentComponent from "./components/admin/AdminCommentComponent";
+import QrScannerComponent from "./components/scanner/QrScannerComponent";
+import BarcodeScannerComponent from "./components/scanner/BarcodeScannerComponent";
 
 
 
@@ -43,6 +45,12 @@ export default function App() {
                             <AuthenticatedRoute path={'/manageProduct'} component={AdminProductComponent}
                                                 role={'admin'}/>
                             <AuthenticatedRoute path={'/manageComment'} component={AdminCommentComponent}
+                                                role={'admin'}/>
+                            <AuthenticatedRoute path={'/scanner'} component={ScannerComponent}
+                                                role={'admin'}/>
+                            <AuthenticatedRoute path={'/qrScanner'} component={QrScannerComponent}
+                                                role={'admin'}/>
+                            <AuthenticatedRoute path={'/barcodeScanner'} component={BarcodeScannerComponent}
                                                 role={'admin'}/>
                         </Switch>
                     </div>

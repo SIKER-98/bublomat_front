@@ -108,7 +108,7 @@ class SearchComponent extends React.Component {
                                                       name={product.productName}
                                                       description={product.description}
                                                       rating={product.rating}
-                                                      img={"/img/wisnia.jpg"}
+                                                      img={product.img}
                                 />
                             </li>
                         )
@@ -124,6 +124,7 @@ class SearchComponent extends React.Component {
             </>
         )
     }
+
 }
 
 export default SearchComponent;

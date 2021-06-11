@@ -2,6 +2,8 @@ import React from 'react';
 
 import ProductModel from "../models/ProductModel";
 import {AddProduct} from "../api/ApiProduct";
+import axios from "../api/axiosHelper";
+import FormData from 'form-data'
 
 class NewProductComponent extends React.Component {
     constructor(props) {
@@ -12,18 +14,22 @@ class NewProductComponent extends React.Component {
             productName: '',
             description: '',
             imageSource: '',
-            image: './logo192.png'
+            image: './logo192.png',
+
+            imageId: 0,
+
+            photo: '',
+            file: null,
         }
 
         this.handleChange = this.handleChange.bind(this);
         this.handleChangeImage = this.handleChangeImage.bind(this);
         this.addProduct = this.addProduct.bind(this);
         this.makeProduct = this.makeProduct.bind(this);
+        this.uploadImage = this.uploadImage.bind(this);
     }
 
-    handleChangeImage(event) {
-        console.log(event.target.files)
-
+    async handleChangeImage(event) {
         if (event.target.files.length !== 0) {
             this.setState({imageSource: event.target.files[0]})
             this.setState({image: URL.createObjectURL(event.target.files[0])})
@@ -31,11 +37,22 @@ class NewProductComponent extends React.Component {
             this.setState({imageSource: '/logo192.png'})
             this.setState({image: '/logo192.png'})
         }
-        // do wysylania
-        // const formData = new FormData();
-        // formData.append('file',this.state.imageSource,);
-        //
-        // console.log(formData);
+
+    }
+
+    async uploadImage() {
+        let formdata = new FormData()
+        formdata.append('image', this.state.imageSource)
+
+        await axios.post('/photo/add', formdata, {params: {title: 'test1'}})
+            .then(res => {
+                const imageId = res.data.replace('redirect:/photos/', '')
+                this.setState({imageId: imageId})
+                console.log('ImageUpload: ', imageId)
+            })
+            .catch(e => {
+                console.log('Problem with image upload')
+            })
     }
 
     // przechwytywanie zmian w polach
@@ -49,44 +66,53 @@ class NewProductComponent extends React.Component {
         product.id = this.state.barcode;
         product.productName = this.state.productName;
         product.description = this.state.description;
-        product.img = this.state.imageSource;
+        product.img = this.state.imageId;
         product.rating = 0
 
         return product;
     }
 
-    addProduct(e) {
-        e.preventDefault()
-
+    verifyInputs() {
         let message = '';
-
         if (!this.state.barcode)
             message += 'Barcode empty!\n';
-
         if (!this.state.productName)
             message += 'Product name empty!\n';
-
         if (!this.state.description)
             message += 'Description empty!\n';
 
+        return message
+    }
+
+    async addProduct(e) {
+        e.preventDefault()
+
+        let message = this.verifyInputs()
         if (message) {
             alert(message);
-        } else {
-            let product = this.makeProduct();
-            let responseCode = AddProduct(product);
-
-            const pointer = this;
-
-            responseCode.then(function (result){
-                if (result === 200) {
-                    alert('Product added!')
-                    pointer.props.history.push(`/search/`)
-                } else {
-                    alert('Catching problem! Try again');
-                }
-            })
-
+            return
         }
+
+        await this.uploadImage()
+        let product = this.makeProduct();
+        let responseCode = AddProduct(product);
+
+        const pointer = this;
+
+        responseCode.then(function (result) {
+            if (result === 200) {
+                // alert('Product added!')
+                console.log('Product added: ', product)
+                pointer.props.history.push(`/search/`)
+            } else {
+                alert('Catching problem! Try again');
+            }
+        })
+    }
+
+    clearImage() {
+        this.setState({imageSource: '/logo192.png'})
+        this.setState({image: '/logo192.png'})
     }
 
     render() {
@@ -107,9 +133,14 @@ class NewProductComponent extends React.Component {
                                name={'imageSource'}
                                id={'file'}
                                className={'form-input-file'}
-                               onChange={this.handleChangeImage}/>
+                               onChange={(e) => this.handleChangeImage(e)}/>
                         <label htmlFor={'file'}
                                className={'btn-blue'}>Select file</label>
+                        <button className={'btn-blue'}
+                                onClick={() => this.clearImage()}
+                        >
+                            Clear image
+                        </button>
                     </div>
 
                     <div className={''}>

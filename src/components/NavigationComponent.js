@@ -26,6 +26,10 @@ class NavigationComponent extends React.Component {
                             <Link to={'/search/'}
                                   className={'navbar-nav-item'}>Search</Link>
                         </li>}
+                        {isUserLoggedIn && <li>
+                            <Link to={'/scanner'}
+                                  className={'navbar-nav-item'}>Scanner</Link>
+                        </li>}
                         <li>
                             <Link to={'/about'}
                                   className={'navbar-nav-item'}>About us</Link>

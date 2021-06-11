@@ -2,6 +2,7 @@ import '../style/ProductCard.css';
 import React, {Component} from "react";
 import {AddComment, ProductComments} from "../api/ApiComment";
 import CommentModel from "../models/CommentModel";
+import axios from "../api/axiosHelper";
 
 class ProductCardComponent extends Component {
     constructor(props) {
@@ -17,6 +18,9 @@ class ProductCardComponent extends Component {
             commentsInMemory: [],
             commentsPage: 1,
             maxCommentsPage: 0,
+
+            photoId: props.img,
+            photo: ''
         }
 
         this.toggleProductsClick = this.toggleProductsClick.bind(this)
@@ -27,9 +31,11 @@ class ProductCardComponent extends Component {
         this.getComments = this.getComments.bind(this)
         this.calculateRate = this.calculateRate.bind(this)
         this.moreComments = this.moreComments.bind(this)
+        this.download = this.download.bind(this)
     }
 
-    componentDidMount() {
+     componentDidMount() {
+         this.download()
         this.getComments().then(r => {
             // console.log(`Comments received to product ${this.props.id}`)
         });
@@ -91,6 +97,18 @@ class ProductCardComponent extends Component {
             }
     }
 
+    async download() {
+        await axios.get(`/photo/${this.state.photoId}`)
+            .then(res => {
+                this.setState({photo: res.data})
+            })
+            .catch(e => {
+                console.log(e)
+            })
+
+
+    }
+
     numberClick(event) {
         const number = event.target;
 
@@ -110,10 +128,10 @@ class ProductCardComponent extends Component {
 
     moreComments() {
         const comments = this.state.comments;
-        const page = (this.state.commentsPage+1)%this.state.maxCommentsPage;
+        const page = (this.state.commentsPage + 1) % this.state.maxCommentsPage;
 
         this.setState({
-            commentsPage: (this.state.commentsPage + 1)%this.state.maxCommentsPage,
+            commentsPage: (this.state.commentsPage + 1) % this.state.maxCommentsPage,
             commentsInMemory: comments.slice((page) * 5, (page + 1) * 5)
         });
     }
@@ -139,7 +157,11 @@ class ProductCardComponent extends Component {
         return (
 
             <div className={`searchedElement`}>
-                <img src={this.props.img} alt={`img ${this.props.name}`}/>
+
+                {
+                    this.state.photo !== '' &&
+                <img src={`data:image/png;base64,${this.state.photo}`} alt={`img ${this.props.name}`}/>
+                }
 
                 <h1>{this.props.name}</h1>
                 <p className={'paragraph-justify'}>{this.props.description}</p>
@@ -206,9 +228,15 @@ class ProductCardComponent extends Component {
             alert(message);
         } else {
             //wyslanie do api
+            console.log(sessionStorage.getItem('userId'))
+            console.log(this.props)
+
+
             let newComment = new CommentModel(sessionStorage.getItem('userId'), this.props.id);
             newComment.content = this.state.userComment;
             newComment.rate = this.state.userRate;
+            console.log('newComment: ')
+            console.log(newComment)
 
             AddComment(newComment).then(() => this.getComments());
         }
@@ -221,3 +249,21 @@ class ProductCardComponent extends Component {
 
 
 export default ProductCardComponent;
+
+
+// <button onClick={() => this.download()}>DOWNLOAD</button>
+// {this.state.photo}
+
+
+// download() {
+//     axios.get('/photo/60bfdd6b22dc8a5f3fd3cc34')
+//         .then(res => {
+//             console.log(res)
+//             this.setState({photo: res.data})
+//         })
+//         .catch(e => {
+//             console.log(e)
+//         })
+//
+//
+// }
