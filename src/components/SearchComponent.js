@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 import '../style/Search.css';
 
 import ProductCardComponent from "./ProductCardComponent";
-import {FetchProduct, SearchProduct} from "../api/ApiProduct";
+import {FetchProduct, GetProductByBarcode, SearchProduct} from "../api/ApiProduct";
 
 
 class SearchComponent extends React.Component {
@@ -22,6 +22,7 @@ class SearchComponent extends React.Component {
         }
 
         this.searchClick = this.searchClick.bind(this);
+        this.barcodeClick = this.barcodeClick.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.renderPageButtons = this.renderPageButtons.bind(this);
     }
@@ -37,6 +38,21 @@ class SearchComponent extends React.Component {
         let products = []
         if (productName) {
             products = await SearchProduct(productName);
+        } else {
+            products = await FetchProduct();
+        }
+
+        this.setState({productsInMemory: products.slice(0, 5)})
+        this.setState({products: products})
+    }
+
+    //klikniecie przycisku wyszukiwania
+    async barcodeClick() {
+        const productName = this.state.searchedProduct;
+
+        let products = []
+        if (productName) {
+            products = await GetProductByBarcode(productName);
         } else {
             products = await FetchProduct();
         }
@@ -78,22 +94,22 @@ class SearchComponent extends React.Component {
         return (
 
             <>
-                <div className={
-                    'content-box'
-                }
-
-                >
+                <div className={'content-box'}>
                     <label className={'form-label'}>Input product name or code:</label>
                     <input name={'searchedProduct'}
                            value={this.state.searchedProduct}
                            onChange={this.handleChange}
                            className={'form-input'}/>
 
-                    <div className={'content-box-col-2'}>
-                        <button className={'btn-blue flex-button'}
-                                onClick={this.searchClick}>Search
+                    <div className={'content-vertical'}>
+                        <button className={'btn-blue '}
+                                onClick={this.searchClick}>Search by name
                         </button>
-                        <Link className={'btn-blue flex-button'}
+                        <button className={'btn-blue '}
+                                onClick={this.barcodeClick}>Search by Barcode
+                        </button>
+
+                        <Link className={'btn-blue '}
                               to={'/newProduct'}>
                             Add new Product
                         </Link>

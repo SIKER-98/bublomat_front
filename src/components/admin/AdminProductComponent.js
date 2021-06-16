@@ -72,6 +72,14 @@ class AdminProductComponent extends Component {
                        }}
                 />
 
+                <label>Barcode:</label>
+                <input name={'barcode'}
+                       defaultValue={product.barcode}
+                       onChange={(event) => {
+                           product.barcode = event.target.value
+                       }}
+                />
+
                 <label>Description:</label>
                 <textarea name={'description'}
                           rows={5}
@@ -117,8 +125,9 @@ class AdminProductComponent extends Component {
                         <thead>
                         <tr>
                             <th colSpan={1}>Id</th>
+                            <th colSpan={1}>Barcode</th>
                             <th colSpan={2}>Product name</th>
-                            <th colSpan={5}>Description</th>
+                            <th colSpan={4}>Description</th>
                             <th colSpan={2}>Actions</th>
                         </tr>
                         </thead>
@@ -126,8 +135,9 @@ class AdminProductComponent extends Component {
                         {this.state.products.map((product, key) => {
                             return <tr key={key}>
                                 <td colSpan={1}><span>{product.id}</span></td>
+                                <td colSpan={1}><span>{product.barcode}</span></td>
                                 <td colSpan={2}>{product.productName}</td>
-                                <td colSpan={5}>{product.description}</td>
+                                <td colSpan={4}>{product.description}</td>
                                 <td colSpan={2}>
                                     <button className={'btn-green'}
                                             onClick={(event) => this.showComments(event, product.id)}>

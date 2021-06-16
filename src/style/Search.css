@@ -4,7 +4,7 @@
 
     box-sizing: border-box;
     margin: 0 auto 30px;
-    max-width: 800px;
+    max-width: 850px;
     text-align: center;
     padding: 10px 50px 20px;
     box-shadow: 0 2px 20px rgba(1, 41, 112, 0.1);
@@ -14,6 +14,17 @@
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+}
+
+.content-vertical{
+    display: flex;
+    flex-direction: row;
+    align-content: space-between;
+   justify-content: space-between;
+
+    box-sizing: border-box;
+    text-align: center;
+    padding: 0 20px;
 }
 
 .flex-button {

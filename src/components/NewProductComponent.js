@@ -10,7 +10,7 @@ class NewProductComponent extends React.Component {
         super(props);
 
         this.state = {
-            barcode: -1,
+            barcode: '',
             productName: '',
             description: '',
             imageSource: '',
@@ -63,10 +63,11 @@ class NewProductComponent extends React.Component {
     // stworzenie instakcji produktu
     makeProduct() {
         let product = new ProductModel();
-        product.id = this.state.barcode;
+        product.id = 0;
         product.productName = this.state.productName;
         product.description = this.state.description;
         product.img = this.state.imageId;
+        product.barcode = this.state.barcode
         product.rating = 0
 
         return product;
@@ -74,8 +75,8 @@ class NewProductComponent extends React.Component {
 
     verifyInputs() {
         let message = '';
-        if (!this.state.barcode)
-            message += 'Barcode empty!\n';
+        // if (!this.state.barcode)
+        //     message += 'Barcode empty!\n';
         if (!this.state.productName)
             message += 'Product name empty!\n';
         if (!this.state.description)
@@ -95,6 +96,12 @@ class NewProductComponent extends React.Component {
 
         await this.uploadImage()
         let product = this.makeProduct();
+
+        if (this.state.imageId === 0) {
+            alert('No image selected')
+            return
+        }
+
         let responseCode = AddProduct(product);
 
         const pointer = this;
