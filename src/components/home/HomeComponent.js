@@ -2,6 +2,7 @@ import React from 'react';
 import './Home.css';
 import {FetchProduct} from "../../api/ApiProduct";
 import {FetchComments} from "../../api/ApiComment";
+import lang from "../../languagePack";
 
 class HomeComponent extends React.Component {
     constructor(props) {
@@ -18,6 +19,7 @@ class HomeComponent extends React.Component {
 
         this.makeStatistics = this.makeStatistics.bind(this);
         this.animatedcounter = this.animatedcounter.bind(this);
+        this.lang = lang.getLang()
     }
 
     componentDidMount() {
@@ -89,15 +91,14 @@ class HomeComponent extends React.Component {
     render() {
         return (
             <div className={'home'}>
-                <div className={'statistic-box'}>Quantity of all products: <span>{this.state.products}</span></div>
-                <div className={'statistic-box'}>Number of all comments: <span>{this.state.comments}</span></div>
-                <div className={'statistic-box'}>Number of products recognized as
-                    bubbles: <span>{this.state.bubels}</span></div>
-                <div className={'statistic-box'}>Number of products recognized as good: <span>{this.state.good}</span>
+                <div className={'statistic-box'}>{this.lang.homeComponent.quantity}<span>{this.state.products}</span></div>
+                <div className={'statistic-box'}>{this.lang.homeComponent.comments}<span>{this.state.comments}</span></div>
+                <div className={'statistic-box'}>{this.lang.homeComponent.bubels}<span>{this.state.bubels}</span></div>
+                <div className={'statistic-box'}>{this.lang.homeComponent.good}<span>{this.state.good}</span>
                 </div>
-                <div className={'statistic-box'}>Number of products recognized as super: <span>{this.state.nice}</span>
+                <div className={'statistic-box'}>{this.lang.homeComponent.super}<span>{this.state.nice}</span>
                 </div>
-                <div className={'statistic-box'}>The ratio of posts to comments: <span>{this.state.ratio}</span></div>
+                <div className={'statistic-box'}>{this.lang.homeComponent.ratio}<span>{this.state.ratio}</span></div>
             </div>
         )
     }

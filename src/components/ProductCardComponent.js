@@ -3,6 +3,7 @@ import React, {Component} from "react";
 import {AddComment, ProductComments} from "../api/ApiComment";
 import CommentModel from "../models/CommentModel";
 import axios from "../api/axiosHelper";
+import lang from "../languagePack";
 
 class ProductCardComponent extends Component {
     constructor(props) {
@@ -32,10 +33,11 @@ class ProductCardComponent extends Component {
         this.calculateRate = this.calculateRate.bind(this)
         this.moreComments = this.moreComments.bind(this)
         this.download = this.download.bind(this)
+        this.lang = lang.getLang()
     }
 
-     componentDidMount() {
-         this.download()
+    componentDidMount() {
+        this.download()
         this.getComments().then(r => {
             // console.log(`Comments received to product ${this.props.id}`)
         });
@@ -153,21 +155,19 @@ class ProductCardComponent extends Component {
     }
 
     render() {
-
         return (
 
             <div className={`searchedElement`}>
-
                 {
                     this.state.photo !== '' &&
-                <img src={`data:image/png;base64,${this.state.photo}`} alt={`img ${this.props.name}`}/>
+                    <img src={`data:image/png;base64,${this.state.photo}`} alt={`img ${this.props.name}`}/>
                 }
 
                 <h1>{this.props.name}</h1>
                 <p className={'paragraph-justify'}>{this.props.description}</p>
-                <h2 className={this.setRatingColour(this.state.productRate)}>Rating: {this.state.productRate}</h2>
+                <h2 className={this.setRatingColour(this.state.productRate)}>{this.lang.productCardComponent.rating}{this.state.productRate}</h2>
 
-                <h2>Your rating</h2>
+                <h2>{this.lang.productCardComponent.yourRating}</h2>
                 <div className={'star'}>
                     <ul className={'rating-numbers'}>
                         {this.ratingRender()}
@@ -180,22 +180,22 @@ class ProductCardComponent extends Component {
                 <div className={'content-box-col-2'}>
                     <button className={'btn-blue'}
                             onClick={this.addComment}>
-                        Add comment
+                        {this.lang.productCardComponent.addComment}
                     </button>
                     <button className={`btn-blue`}
                             onClick={this.toggleProductsClick}>
-                        {this.state.showComments ? `Hide reviews` : "Show reviews"}
+                        {this.state.showComments ?  this.lang.productCardComponent.hide :  this.lang.productCardComponent.show}
                     </button>
                 </div>
 
                 {
                     this.state.showComments &&
                     <>
-                        <h1>Latest comments:</h1>
+                        <h1>{this.lang.productCardComponent.latestComment}</h1>
                         <ul>
                             {this.state.commentsInMemory.map((comment) => (
                                 <li key={comment.commentId}>
-                                    <h2 className={this.setRatingColour(comment.rate)}>Rate: {comment.rate}</h2>
+                                    <h2 className={this.setRatingColour(comment.rate)}>{this.lang.productCardComponent.rate}{comment.rate}</h2>
                                     <p>{comment.content}</p>
                                 </li>
                             ))}
@@ -205,7 +205,7 @@ class ProductCardComponent extends Component {
                         <div className={'flex-center'}>
                             <button className={'btn-blue'}
                                     onClick={this.moreComments}>
-                                Load more comments
+                                {this.lang.productCardComponent.loadMore}
                             </button>
                         </div>}
                     </>

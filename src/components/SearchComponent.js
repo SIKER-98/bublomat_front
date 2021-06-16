@@ -5,6 +5,7 @@ import '../style/Search.css';
 
 import ProductCardComponent from "./ProductCardComponent";
 import {FetchProduct, GetProductByBarcode, SearchProduct} from "../api/ApiProduct";
+import lang from "../languagePack";
 
 
 class SearchComponent extends React.Component {
@@ -25,6 +26,7 @@ class SearchComponent extends React.Component {
         this.barcodeClick = this.barcodeClick.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.renderPageButtons = this.renderPageButtons.bind(this);
+        this.lang = lang.getLang()
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -95,7 +97,7 @@ class SearchComponent extends React.Component {
 
             <>
                 <div className={'content-box'}>
-                    <label className={'form-label'}>Input product name or code:</label>
+                    <label className={'form-label'}>{this.lang.searchComponent.input}</label>
                     <input name={'searchedProduct'}
                            value={this.state.searchedProduct}
                            onChange={this.handleChange}
@@ -103,15 +105,15 @@ class SearchComponent extends React.Component {
 
                     <div className={'content-vertical'}>
                         <button className={'btn-blue '}
-                                onClick={this.searchClick}>Search by name
+                                onClick={this.searchClick}>{this.lang.searchComponent.byName}
                         </button>
                         <button className={'btn-blue '}
-                                onClick={this.barcodeClick}>Search by Barcode
+                                onClick={this.barcodeClick}>{this.lang.searchComponent.byCode}
                         </button>
 
                         <Link className={'btn-blue '}
                               to={'/newProduct'}>
-                            Add new Product
+                            {this.lang.searchComponent.addNew}
                         </Link>
                     </div>
                 </div>

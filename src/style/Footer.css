@@ -10,3 +10,19 @@
     border-top: 1px solid #E2ECFE;
     height: 2.5rem;
 }
+
+.lang-button {
+    transform: translate(-50%, -50%);
+    position: absolute;
+    top: 50%;
+    right: 0;
+    font-size: 1.2em;
+    outline: none;
+    border-radius: 100%;
+    border: 1px solid black;
+    background-color: white;
+}
+
+.lang-button img{
+    height: 30px;
+}

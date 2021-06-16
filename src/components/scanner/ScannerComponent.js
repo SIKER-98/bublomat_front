@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import BarcodeScannerComponent from "react-webcam-barcode-scanner";
 import './Barcode.css'
+import lang from "../../languagePack";
 
 class ScannerComponent extends Component {
     constructor(props) {
@@ -11,6 +12,7 @@ class ScannerComponent extends Component {
         }
 
         this.searchClick=this.searchClick.bind(this)
+        this.lang = lang.getLang()
     }
 
     catchBarCode(err, result) {
@@ -30,7 +32,7 @@ class ScannerComponent extends Component {
     render() {
         return (
             <div className={'content-box'}>
-                <h1>Barcode: {this.state.barcode}</h1>
+                <h1>{this.lang.scannerComponent.barcode}{this.state.barcode}</h1>
                 <div className={'barcode-scanner'}>
                     <BarcodeScannerComponent width={'100%'}
                                              height={'100%'}
@@ -41,7 +43,7 @@ class ScannerComponent extends Component {
                 <button className={'btn-blue'}
                 onClick={()=>this.searchClick()}
                 >
-                    Search product
+                    {this.lang.scannerComponent.search}
                 </button>
             </div>
         )

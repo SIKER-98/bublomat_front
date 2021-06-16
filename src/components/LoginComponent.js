@@ -3,8 +3,12 @@ import React from 'react';
 import '../style/Form.css'
 import AuthenticationService from "../authentication/AuthenticationService";
 import {GetAccessToken} from "../api/ApiUser";
+import lang from '../languagePack'
+
 
 class LoginComponent extends React.Component {
+
+
     constructor(props) {
         super(props);
 
@@ -16,7 +20,10 @@ class LoginComponent extends React.Component {
 
         this.handleChange = this.handleChange.bind(this);
         this.loginClicked = this.loginClicked.bind(this);
+
+        this.lang = lang.getLang()
     }
+
 
     // obsluga wprowadzania w inputy
     handleChange(event) {
@@ -27,14 +34,14 @@ class LoginComponent extends React.Component {
     async loginClicked(event) {
         event.preventDefault();
 
-        let status = await GetAccessToken("test@test.test",'test')
+        let status = await GetAccessToken("test@test.test", 'test')
 
-        if(status===200){
-                AuthenticationService.loginSuccessful(this.state.username, '2', 'admin');
-                this.props.history.push('/search/');
-        }else{
-                this.setState({hasLoginFailed: true});
-                alert('Invalid login or password')
+        if (status === 200) {
+            AuthenticationService.loginSuccessful(this.state.username, '2', 'admin');
+            this.props.history.push('/search/');
+        } else {
+            this.setState({hasLoginFailed: true});
+            alert('Invalid login or password')
         }
 
         // if (this.state.username === 'user' && this.state.password === 'user') {
@@ -52,21 +59,21 @@ class LoginComponent extends React.Component {
     render() {
         return (
             <form className={'form'}>
-                <label className={'form-label'}>Email address:</label>
+                <label className={'form-label'}>{this.lang.loginComponent.email}</label>
                 <input name={'username'}
                        autoComplete={'off'}
                        onChange={this.handleChange}
                        className={`form-input ${this.state.hasLoginFailed ? 'form-input-wrong' : ''}`}
                        type={'email'}/>
 
-                <label className={'form-label'}>Password:</label>
+                <label className={'form-label'}>{this.lang.loginComponent.password}</label>
                 <input name={'password'}
                        onChange={this.handleChange}
                        className={`form-input ${this.state.hasLoginFailed ? 'form-input-wrong' : ''}`}
                        type={'password'}/>
 
                 <button className={'btn-blue'}
-                        onClick={this.loginClicked}>Login
+                        onClick={this.loginClicked}>{this.lang.loginComponent.login}
                 </button>
             </form>
         )

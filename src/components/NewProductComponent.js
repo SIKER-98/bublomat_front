@@ -4,6 +4,7 @@ import ProductModel from "../models/ProductModel";
 import {AddProduct} from "../api/ApiProduct";
 import axios from "../api/axiosHelper";
 import FormData from 'form-data'
+import lang from "../languagePack";
 
 class NewProductComponent extends React.Component {
     constructor(props) {
@@ -27,6 +28,8 @@ class NewProductComponent extends React.Component {
         this.addProduct = this.addProduct.bind(this);
         this.makeProduct = this.makeProduct.bind(this);
         this.uploadImage = this.uploadImage.bind(this);
+
+        this.lang = lang.getLang()
     }
 
     async handleChangeImage(event) {
@@ -131,9 +134,9 @@ class NewProductComponent extends React.Component {
                              alt={'test'}
                              className={'form-image'}/>
                         <div>
-                            <p>Filename: {this.state.imageSource.name}</p>
-                            <p>Filetype: {this.state.imageSource.type}</p>
-                            <p>Size in bytes: {this.state.imageSource.size}</p>
+                            <p>{this.lang.newProductComponent.filename}{this.state.imageSource.name}</p>
+                            <p>{this.lang.newProductComponent.filetype}{this.state.imageSource.type}</p>
+                            <p>{this.lang.newProductComponent.size}{this.state.imageSource.size}</p>
                         </div>
 
                         <input type={'file'}
@@ -142,29 +145,29 @@ class NewProductComponent extends React.Component {
                                className={'form-input-file'}
                                onChange={(e) => this.handleChangeImage(e)}/>
                         <label htmlFor={'file'}
-                               className={'btn-blue'}>Select file</label>
+                               className={'btn-blue'}>{this.lang.newProductComponent.selectFile}</label>
                         <button className={'btn-blue'}
                                 onClick={() => this.clearImage()}
                         >
-                            Clear image
+                            {this.lang.newProductComponent.clearImage}
                         </button>
                     </div>
 
                     <div className={''}>
                         <form className={'form'}>
-                            <label className={'form-label'}>Barcode:</label>
+                            <label className={'form-label'}>{this.lang.newProductComponent.barcode}</label>
                             <input type={'number'} name={'barcode'}
                                    autoComplete={'off'}
                                    onChange={this.handleChange}
                                    className={'form-input'}/>
 
-                            <label className={'form-label'}>Name:</label>
+                            <label className={'form-label'}>{this.lang.newProductComponent.name}</label>
                             <input type={'text'} name={'productName'}
                                    autoComplete={'off'}
                                    onChange={this.handleChange}
                                    className={'form-input'}/>
 
-                            <label className={'form-label'}>Description:</label>
+                            <label className={'form-label'}>{this.lang.newProductComponent.description}</label>
                             <textarea cols={'30'} rows={'5'}
                                       name={'description'}
                                       autoComplete={'off'}
@@ -173,7 +176,7 @@ class NewProductComponent extends React.Component {
 
                             <button className={'btn-blue'}
                                     onClick={this.addProduct}>
-                                Add product
+                                {this.lang.newProductComponent.addProduct}
                             </button>
                         </form>
                     </div>

@@ -1,4 +1,5 @@
 import React from 'react';
+import lang from "../languagePack";
 
 class ContactComponent extends React.Component {
     constructor(props) {
@@ -12,6 +13,8 @@ class ContactComponent extends React.Component {
 
         this.handleChange = this.handleChange.bind(this);
         this.sendEmailClick = this.sendEmailClick.bind(this);
+
+        this.lang = lang.getLang()
     }
 
     handleChange(event) {
@@ -46,20 +49,20 @@ class ContactComponent extends React.Component {
                 <div className={'content-box'}>
                     <div className={'content-box-col-2'}>
                         <div>
-                            <label className={'form-label'}>Title:</label>
+                            <label className={'form-label'}>{this.lang.contactComponent.title}</label>
                             <input name={'title'} className={'form-input'} onChange={this.handleChange}/>
                         </div>
 
                         <div>
-                            <label className={'form-label'}>Your mail:</label>
+                            <label className={'form-label'}>{this.lang.contactComponent.mail}</label>
                             <input name={'mail'} className={'form-input'} onChange={this.handleChange}/>
                         </div>
                     </div>
 
-                    <label className={'form-label'}>Your message:</label>
+                    <label className={'form-label'}>{this.lang.contactComponent.message}</label>
                     <textarea name={'message'} cols={'30'} rows={'5'} className={'form-textArea'} onChange={this.handleChange}/>
 
-                    <button className={'btn-blue'} onClick={this.sendEmailClick}>SEND MESSAGE</button>
+                    <button className={'btn-blue'} onClick={this.sendEmailClick}>{this.lang.contactComponent.send}</button>
                 </div>
 
             </>

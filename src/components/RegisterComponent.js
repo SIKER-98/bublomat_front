@@ -2,6 +2,7 @@ import React from 'react';
 import '../style/Form.css'
 import {Register} from "../api/ApiUser";
 import AuthenticationService from "../authentication/AuthenticationService";
+import lang from "../languagePack";
 
 class RegisterComponent extends React.Component {
 
@@ -29,6 +30,8 @@ class RegisterComponent extends React.Component {
         this.validatePassword = this.validatePassword.bind(this);
 
         this.errorMessage = '';
+
+        this.lang = lang.getLang()
     }
 
     // obsluga wprowadzania w pola
@@ -90,35 +93,35 @@ class RegisterComponent extends React.Component {
     render() {
         return (
             <form className={'form'}>
-                <label className={'form-label'}>First name:</label>
+                <label className={'form-label'}>{this.lang.registerComponent.firstName}</label>
                 <input name={'firstName'}
                        type={'text'}
                        autoComplete={'off'}
                        onChange={this.handleChange}
                        className={'form-input'}/>
 
-                <label className={'form-label'}>Last name:</label>
+                <label className={'form-label'}>{this.lang.registerComponent.lastName}</label>
                 <input name={'secondName'}
                        type={'text'}
                        autoComplete={'off'}
                        onChange={this.handleChange}
                        className={'form-input'}/>
 
-                <label className={'form-label'}>Password:</label>
+                <label className={'form-label'}>{this.lang.registerComponent.password}</label>
                 <input name={'password'}
                        type={'password'}
                        onChange={this.handleChange}
                        autoComplete={'off'}
                        className={'form-input'}/>
 
-                <label className={'form-label'}>Confirm Password:</label>
+                <label className={'form-label'}>{this.lang.registerComponent.password2}</label>
                 <input name={'confirmedPassword'}
                        type={'password'}
                        onChange={this.handleChange}
                        autoComplete={'off'}
                        className={'form-input'}/>
 
-                <label className={'form-label'}>Email:</label>
+                <label className={'form-label'}>{this.lang.registerComponent.email}</label>
                 <input name={'email'}
                        type={'email'}
                        autoComplete={'off'}
@@ -126,7 +129,7 @@ class RegisterComponent extends React.Component {
                        className={'form-input'}/>
 
                 <button className={'btn-blue'} onClick={this.registerClicked}>
-                    Register
+                    {this.lang.registerComponent.register}
                 </button>
             </form>
         )
