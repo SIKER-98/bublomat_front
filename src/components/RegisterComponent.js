@@ -81,8 +81,8 @@ class RegisterComponent extends React.Component {
                 const status = await Register(this.state.firstName, this.state.secondName, this.state.password, this.state.email)
 
                 if(status === 200){
-                    AuthenticationService.loginSuccessful(this.state.email, '2', 'admin');
-                    this.props.history.push('/search/');
+                    // AuthenticationService.loginSuccessful(this.state.email, '2', 'admin');
+                    this.props.history.push('/login');
                 }else{
                     alert('Something went wrong, try again later')
                 }

@@ -15,8 +15,10 @@ class NavigationComponent extends React.Component {
 
     render() {
 
+        // const isUserLoggedIn = true;
         const isUserLoggedIn = AuthenticationService.isUserLoggedIn();
         const isAdminLoggedIn = AuthenticationService.isAdminLoggedIn();
+        // const isAdminLoggedIn = true;
 
         return (
             <header className={'navbar'}>

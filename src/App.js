@@ -17,6 +17,7 @@ import NewProductComponent from "./components/NewProductComponent";
 import AdminProductComponent from "./components/admin/AdminProductComponent";
 import AdminCommentComponent from "./components/admin/AdminCommentComponent";
 import ScannerComponent from "./components/scanner/ScannerComponent";
+import AdminUserComponent from "./components/admin/AdminUserComponent";
 
 
 
@@ -41,6 +42,8 @@ export default function App() {
                             <AuthenticatedRoute path={'/manageProduct'} component={AdminProductComponent}
                                                 role={'admin'}/>
                             <AuthenticatedRoute path={'/manageComment'} component={AdminCommentComponent}
+                                                role={'admin'}/>
+                            <AuthenticatedRoute path={'/manageUser'} component={AdminUserComponent}
                                                 role={'admin'}/>
                             <AuthenticatedRoute path={'/scanner'} component={ScannerComponent}/>
                         </Switch>

@@ -34,10 +34,13 @@ class LoginComponent extends React.Component {
     async loginClicked(event) {
         event.preventDefault();
 
-        let status = await GetAccessToken("test@test.test", 'test')
+        let status = await GetAccessToken(this.state.username, this.state.password)
 
         if (status === 200) {
+            if(this.state.username==='admin')
             AuthenticationService.loginSuccessful(this.state.username, '2', 'admin');
+            else
+                AuthenticationService.loginSuccessful(this.state.username, '1', 'user');
             this.props.history.push('/search/');
         } else {
             this.setState({hasLoginFailed: true});

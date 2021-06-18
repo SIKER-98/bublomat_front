@@ -91,13 +91,12 @@ class AdminCommentComponent extends Component {
 
         let comments = this.state.comments
 
-        await DeleteComment(id).then(status => {
-            if (status === 200) {
-                comments = comments.filter((comment) => comment.id !== id)
-            }
-        })
-
-        this.setState({comments: comments});
+        const status = await DeleteComment(id)
+        if (status === 200) {
+            comments = comments.filter((comment) => comment.commentId !== id)
+            this.setState({comments: comments});
+        }
+        
     }
 
     render() {
@@ -130,7 +129,7 @@ class AdminCommentComponent extends Component {
                                         Edit
                                     </button>
                                     <button className={'btn-red'}
-                                            onClick={(event) => this.deleteComment(event, comment.id)}>
+                                            onClick={(event) => this.deleteComment(event, comment.commentId)}>
                                         Delete
                                     </button>
                                 </td>

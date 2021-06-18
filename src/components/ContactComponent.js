@@ -1,5 +1,6 @@
 import React from 'react';
 import lang from "../languagePack";
+import SendEmail from "../api/ApiContact";
 
 class ContactComponent extends React.Component {
     constructor(props) {
@@ -21,7 +22,7 @@ class ContactComponent extends React.Component {
         this.setState({[event.target.name]: event.target.value});
     }
 
-    sendEmailClick(event) {
+    async sendEmailClick(event) {
         event.preventDefault();
 
         let message = '';
@@ -35,11 +36,15 @@ class ContactComponent extends React.Component {
         if (!this.state.message)
             message += 'Empty message!\n';
 
+
         if (!message) {
-            alert('Send message')
+            let status = await SendEmail(this.state.mail, this.state.title, this.state.message)
+            alert('Message send')
+            this.setState({title:'',mail:'',message:''})
         } else {
             alert(message);
         }
+
     }
 
 
@@ -60,9 +65,11 @@ class ContactComponent extends React.Component {
                     </div>
 
                     <label className={'form-label'}>{this.lang.contactComponent.message}</label>
-                    <textarea name={'message'} cols={'30'} rows={'5'} className={'form-textArea'} onChange={this.handleChange}/>
+                    <textarea name={'message'} cols={'30'} rows={'5'} className={'form-textArea'}
+                              onChange={this.handleChange}/>
 
-                    <button className={'btn-blue'} onClick={this.sendEmailClick}>{this.lang.contactComponent.send}</button>
+                    <button className={'btn-blue'}
+                            onClick={this.sendEmailClick}>{this.lang.contactComponent.send}</button>
                 </div>
 
             </>

@@ -26,7 +26,7 @@ async function SearchProduct(productName) {
     let searched = new ProductModel();
     searched.productName = productName;
 
-    await axios.get(api, {params: {productName: productName}})
+    await axios.get(api, {params: {productName: productName + ''}})
         .then(res => products = JSON.parse(res.request.response))
 
     return products;
@@ -85,7 +85,7 @@ async function DeleteProduct(id) {
     return response.status
 }
 
-async function GetProductByBarcode(barcode){
+async function GetProductByBarcode(barcode) {
     const api = '/products/searchbarcode';
     let products = [];
 
@@ -97,12 +97,11 @@ async function GetProductByBarcode(barcode){
         })
 
 
-
     return products;
 }
 
 async function EditProduct(product) {
-    const api = 'products/updateproduct?'
+    const api = '/products/updateproduct'
 
     console.log(product)
     let status = 0
@@ -118,10 +117,17 @@ async function EditProduct(product) {
     //         console.log(res)
     //         status = res.status
     //     })
-    const params = new URLSearchParams(product).toString()
-    console.log(params)
+    // const params = new URLSearchParams(product).toString()
+    // console.log(params)
 
-    await axios.patch(api + params)
+    await axios.post(api, {
+        id: product.id,
+        productName: product.productName,
+        description: product.description,
+        rating: product.rating,
+        img: product.img,
+        barcode: product.barcode
+    }, {})
         .then(res => {
             console.log(res)
             status = res.status

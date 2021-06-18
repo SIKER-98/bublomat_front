@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import {DeleteProduct, EditProduct, FetchProduct} from "../../api/ApiProduct";
 
 import "../../style/Admin.css"
+import {Link} from "react-router-dom";
 
 class AdminProductComponent extends Component {
     constructor(props) {
@@ -52,7 +53,7 @@ class AdminProductComponent extends Component {
             })
 
             this.setState({products: products})
-        }else{
+        } else {
             alert('something went wrong')
         }
 
@@ -119,6 +120,11 @@ class AdminProductComponent extends Component {
     render() {
         return (
             <>
+                <Link to={'/manageUser'}
+                      className={'btn-blue'}
+                >
+                    Users
+                </Link>
                 {this.state.isEdited && this.editProduct()}
                 <div className={'content-box-full'}>
                     <table className={'table-admin'}>

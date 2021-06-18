@@ -13,6 +13,7 @@ class FooterComponent extends React.Component {
         }
 
         this.lang = lang.getLang()
+        this.changeLang=this.changeLang.bind(this)
     }
 
     componentDidMount() {
@@ -21,8 +22,6 @@ class FooterComponent extends React.Component {
             this.setState({icon: '/img/en-icon.png'})
         else
             this.setState({icon: '/img/pl-icon.webp'})
-        console.log(l)
-        console.log(this.state.icon)
     }
 
     changeLang(event) {
